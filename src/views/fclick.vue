@@ -1,10 +1,13 @@
 <template>
-    <div class="scroll">
+    <div class="scroll" ref="scroll" @scroll="scroll">
+<div class="main">
 
 
-        <img src="../assets/images/car1.png" class="car" id="car"/>
+    <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;"/>
+    <img src="../assets/images/car1.png" class="car" id="car"/>
 <!--        <div class="block" id="test">试试单击、双击或长按这里<br>Try to click , double-click or long-press here.</div>-->
 <!--        <div class="block" id="test1">试试单击、双击或长按这里<br>Try to click , double-click or long-press here.</div>-->
+</div>
     </div>
 </template>
 
@@ -21,6 +24,8 @@
             var fc=new fclick(document.getElementsByClassName('car'));
 
             fc.single(function(e){
+                let div = this.$refs.scroll
+                console.log(div)
                 //e为event元素
                 //e.target可以获取被点击的元素
                 //e.clientX可以获取鼠标X轴位置，Y轴同理
@@ -117,7 +122,24 @@
 
 
         },
-        methods: {},
+        methods: {
+            scroll(e) {
+                //滚动条拖动的长度
+                const scrollTop = e.target.scrollTop
+                //网页正文全文高，包括有滚动条时的未见区域
+                let scrollHeight = this.$refs.scroll.scrollHeight
+                // 可视窗口的高度
+                let clientHeight = this.$refs.scroll.clientHeight
+                //减去滚动条可拖动的网页长度
+                let Height = scrollHeight - clientHeight
+                //滚动条滚动距离 百分比
+                let scrolldrag = scrollTop / Height
+                let _scrolldrag = (scrolldrag * 100).toFixed(2) * 1
+                this.gkd = _scrolldrag;
+                // console.log(clientHeight)
+
+            },
+        },
 
     }
 </script>
@@ -146,8 +168,9 @@
     }
 
     .car {
-        margin-top: 50px;
-        margin-left: 50px;
+        position: absolute;
+      top: 5%;
+        left: 5%;
         width: 20%;
         height: auto;
     }

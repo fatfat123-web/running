@@ -50,10 +50,11 @@
 
             // 长按事件
             gtouchstart(e) {
-                let clientHeight = this.$refs.scroll.clientHeight
+
                 this.startX = e.changedTouches[0].pageX;
                 this.startY = e.changedTouches[0].pageY;
                 this.front = (clientHeight) * (0.4);
+                let clientHeight = this.$refs.scroll.clientHeight
                 let div = this.$refs.scroll
 
 
