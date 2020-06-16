@@ -55,7 +55,7 @@
                 this.startY = e.changedTouches[0].pageY;
                 this.front = (clientHeight) * (0.4);
                 let div = this.$refs.scroll
-                //执行长按的内容
+
 
                 //执行长按的内容
                 this.Loop = setTimeout( ()=> {

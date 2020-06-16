@@ -11,6 +11,14 @@ const routes = [
     component: () => import('@/views/index'),
 
   },
+  {
+    path: '/fclick',
+    name: 'fclick',
+    component: () => import('@/views/fclick'),
+
+  },
+
+
 ]
 
 const router = new VueRouter({
