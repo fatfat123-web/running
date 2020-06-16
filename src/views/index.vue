@@ -50,34 +50,31 @@
 
             // 长按事件
             gtouchstart(e) {
-
+                let clientHeight = this.$refs.scroll.clientHeight
                 this.startX = e.changedTouches[0].pageX;
                 this.startY = e.changedTouches[0].pageY;
                 this.front = (clientHeight) * (0.4);
-                let clientHeight = this.$refs.scroll.clientHeight
                 let div = this.$refs.scroll
 
 
                 //执行长按的内容
                 this.Loop = setTimeout( ()=> {
-                      this.loop=0;
+                    this.loop=0;
                     // console.log(this.front)
                     if (this.startY < this.front) {
-                          //长按后退
                         this.flagfind=false
                         this.retreat()
 
                         console.log( div.scrollTop)
                     }else {
-                        //长按前进
                         this.flagfind=false
                         this.advance()
 
                         console.log( div.scrollTop)
                     }
-                    return false;
-                }, 500);
 
+                }, 500);
+                return false;
             },
             //   前进
             advance() {
@@ -86,14 +83,14 @@
                 let div = this.$refs.scroll
                 div.scrollTop += 2
 
-                    if (this.flagfind===true)
+                if (this.flagfind===true)
                     return false;
                 window.requestAnimationFrame(this.advance)
-                    // this.timer = setInterval(() => {
-                    //     console.log(this.timer)
-                    //     this.test++;
-                    //     console.log(this.test)
-                    // }, 1000)
+                // this.timer = setInterval(() => {
+                //     console.log(this.timer)
+                //     this.test++;
+                //     console.log(this.test)
+                // }, 1000)
 
 
             },
@@ -118,16 +115,16 @@
                 // div.scrollTop += 2
 
                 if (self.Loop !== 0) {
-                    console.log('触摸移开事件');
+                    console.log('点击事件');
                     this.flagfind=true;
-                    this.loop=0;
                     console.log(this.flagfind)
+                    return false;
                 }
-                // return false;
+
             },
 
             touchcancel(e){
-              console.log(1123)
+                console.log(1123)
                 this.flagfind=false
             },
 

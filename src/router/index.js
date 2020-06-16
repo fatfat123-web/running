@@ -6,13 +6,13 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/index',
+    path: '/',
     name: 'index',
     component: () => import('@/views/index'),
 
   },
   {
-    path: '/',
+    path: '/fclick',
     name: 'fclick',
     component: () => import('@/views/fclick'),
 
