@@ -1,6 +1,7 @@
 <template>
     <div class="scroll" ref="scroll" @scroll="scroll">
-        <div class="main" @touchstart.prevent="gtouchstart"  @touchend.prevent="triggerReply" @touchmove="touchmove"  @touchcancel="touchcancel">
+<!--        <div class="main" @touchstart.prevent="gtouchstart"  @touchend.prevent="triggerReply" @touchmove="touchmove"  @touchcancel="touchcancel">-->
+        <div class="main" @touchstart.prevent="gtouchstart" @touchend.prevent="triggerReply">
 
             <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;"/>
 
@@ -31,6 +32,10 @@
         mounted() {
         },
         methods: {
+            tt() {
+                // console.log(111)
+                this.advance()
+            },
             scroll(e) {
                 //滚动条拖动的长度
                 const scrollTop = e.target.scrollTop
@@ -49,6 +54,7 @@
             },
 
             // 长按事件
+            // 触摸开始
             gtouchstart(e) {
                 let clientHeight = this.$refs.scroll.clientHeight
                 this.startX = e.changedTouches[0].pageX;
@@ -58,8 +64,8 @@
 
 
                 //执行长按的内容
-                this.Loop = setTimeout( ()=> {
-                    this.loop=0;
+                // this.Loop = setTimeout( ()=> {
+                //     this.loop=0;
                     // console.log(this.front)
                     if (this.startY < this.front) {
                         this.flagfind=false
@@ -73,8 +79,8 @@
                         console.log( div.scrollTop)
                     }
 
-                }, 500);
-                return false;
+                // }, 500);
+                // return false;
             },
             //   前进
             advance() {
@@ -83,8 +89,7 @@
                 let div = this.$refs.scroll
                 div.scrollTop += 2
 
-                if (this.flagfind===true)
-                    return false;
+                if (this.flagfind===true) return false;
                 window.requestAnimationFrame(this.advance)
                 // this.timer = setInterval(() => {
                 //     console.log(this.timer)
@@ -99,27 +104,27 @@
                 let div = this.$refs.scroll
                 div.scrollTop -= 2
                 console.log('后退了')
-                if (this.flagfind===true)
-                    return false;
+                if (this.flagfind===true) return false;
                 window.requestAnimationFrame(this.retreat)
             },
 
 
-            //
+            // 触摸结束
             triggerReply() {
+                this.flagfind = true;
                 // let div = this.$refs.scroll
-                const self = this;
+                // const self = this;
                 // clearTimeout(this.timer);
                 // this.flagfind=true;
                 // //这里click内容
                 // div.scrollTop += 2
 
-                if (self.Loop !== 0) {
-                    console.log('点击事件');
-                    this.flagfind=true;
-                    console.log(this.flagfind)
-                    return false;
-                }
+                // if (self.Loop !== 0) {
+                //     console.log('点击事件');
+                //     this.flagfind=true;
+                //     console.log(this.flagfind)
+                //     return false;
+                // }
 
             },
 
