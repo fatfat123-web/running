@@ -62,19 +62,21 @@
                       this.loop=0;
                     // console.log(this.front)
                     if (this.startY < this.front) {
+                          //长按后退
                         this.flagfind=false
                         this.retreat()
 
                         console.log( div.scrollTop)
                     }else {
+                        //长按前进
                         this.flagfind=false
                         this.advance()
 
                         console.log( div.scrollTop)
                     }
-
+                    return false;
                 }, 500);
-                return false;
+
             },
             //   前进
             advance() {
@@ -115,12 +117,12 @@
                 // div.scrollTop += 2
 
                 if (self.Loop !== 0) {
-                    console.log('点击事件');
+                    console.log('触摸移开事件');
                     this.flagfind=true;
+                    this.loop=0;
                     console.log(this.flagfind)
-                    return false;
                 }
-
+                // return false;
             },
 
             touchcancel(e){
