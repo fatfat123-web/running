@@ -9,7 +9,7 @@
 </template>
 
 <script>
-    import click from '../assets/js/click'
+    import fclick from '../assets/js/click'
     export default {
         name: "fclick",
         data() {

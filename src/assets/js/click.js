@@ -1,5 +1,5 @@
 /* FermionClick*/
-function  fclick(){
+
 var delayTime=400;/*双击延时时间*/
 /*
  *@method typeObj
@@ -73,7 +73,6 @@ function fclick(elementx){
             }
         }
     }
-    
-}
+
 }
 export default fclick

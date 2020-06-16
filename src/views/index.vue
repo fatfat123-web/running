@@ -1,6 +1,6 @@
 <template>
     <div class="scroll" ref="scroll" @scroll="scroll">
-        <div class="main" @touchstart.prevent="gtouchstart"  @touchend.prevent="triggerReply" @touchmove="touchmove">
+        <div class="main" @touchstart.prevent="gtouchstart"  @touchend.prevent="triggerReply" @touchmove="touchmove"  @touchcancel="touchcancel">
 
             <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;"/>
 
@@ -62,10 +62,14 @@
                       this.loop=0;
                     // console.log(this.front)
                     if (this.startY < this.front) {
+                        this.flagfind=false
                         this.retreat()
+
                         console.log( div.scrollTop)
                     }else {
+                        this.flagfind=false
                         this.advance()
+
                         console.log( div.scrollTop)
                     }
 
@@ -78,9 +82,10 @@
                 console.log(this.flagfind,'前进了')
                 let div = this.$refs.scroll
                 div.scrollTop += 2
-                window.requestAnimationFrame(this.advance)
+
                     if (this.flagfind===true)
                     return false;
+                window.requestAnimationFrame(this.advance)
                     // this.timer = setInterval(() => {
                     //     console.log(this.timer)
                     //     this.test++;
@@ -94,9 +99,9 @@
                 let div = this.$refs.scroll
                 div.scrollTop -= 2
                 console.log('后退了')
-                window.requestAnimationFrame(this.retreat)
                 if (this.flagfind===true)
                     return false;
+                window.requestAnimationFrame(this.retreat)
             },
 
 
@@ -108,14 +113,20 @@
                 // this.flagfind=true;
                 // //这里click内容
                 // div.scrollTop += 2
+
                 if (self.Loop !== 0) {
                     console.log('点击事件');
                     this.flagfind=true;
+                    console.log(this.flagfind)
+                    return false;
                 }
-                // return false;
+
             },
 
-
+            touchcancel(e){
+              console.log(1123)
+                this.flagfind=false
+            },
 
             touchmove(e) {
                 e.preventDefault();
