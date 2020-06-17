@@ -43,6 +43,7 @@
                 flagfind:false,
                 mark: 0,
                 rs:null,
+                ss:null,
                 img: [require('../assets/images/a.png'), require('../assets/images/b.png'),
                     require('../assets/images/c.png')],
 
@@ -68,10 +69,12 @@
                 //滚动条滚动距离 百分比
                 let scrolldrag = scrollTop / Height
 
-                this.rs = (scrolldrag * 600).toFixed(2) * 1
+                this.rs = (scrolldrag * 500).toFixed(2) * 1
 
+
+                 this.ss=parseInt(scrolldrag * 300)
                 // this.advance(_scrolldrag)
-
+                 console.log(this.ss)
                 // console.log(clientHeight)
 
             },
@@ -116,7 +119,7 @@
                 let div = this.$refs.scroll
                 div.scrollTop += 2
                  //rs必须要是动态的 rs为
-                 console.log(this.rs)
+                 // console.log(this.rs)
                 // console.log(_scrolldrag)
                 let arr = [0, 1, 0, 2]
                 this.mark = arr[parseInt(this.rs) % 4];
@@ -158,7 +161,11 @@
             // 触摸结束
             triggerReply() {
                 this.flagfind = true;
-                // this.mark=0;
+
+                this.timer = setInterval(() => {
+                    this.mark=0;
+                }, 100)
+
                 // console.log(this.mark)
                 // let div = this.$refs.scroll
                 // const self = this;
