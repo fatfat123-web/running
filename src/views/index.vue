@@ -1,9 +1,23 @@
 <template>
     <div class="scroll" ref="scroll" @scroll="scroll">
-<!--        <div class="main" @touchstart.prevent="gtouchstart"  @touchend.prevent="triggerReply" @touchmove="touchmove"  @touchcancel="touchcancel">-->
+
         <div class="main" @touchstart.prevent="gtouchstart" @touchend.prevent="triggerReply">
 
             <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;"/>
+
+            <div  style="width:31%;position: fixed;z-index: 999" ref="go" :style="go" v-if="kg===false">
+
+                <img style="width: 100%;height: auto" class="element" :src="item" v-for="(item,index) in img2"
+                     v-show="index === mark">
+
+
+            </div>
+
+            <div  style="width:31%;position: fixed;z-index: 999" ref="go" :style="go" v-if="kg===true">
+
+                <img style="width: 100%;height: auto" class="element" :src="item" v-for="(item,index) in img"
+                     v-show="index === mark">
+            </div>
 
         </div>
     </div>
@@ -15,6 +29,7 @@
         data() {
 
             return {
+                kg:true,
                 //前进
                 front: null,
                 //左边区域
@@ -23,19 +38,24 @@
                 Y: null,
                 startX: null,
                 startY: null,
-                Loop: 0,
                 test: 0,
                 timer: null,
                 flagfind:false,
+                mark: 0,
+                rs:null,
+                img: [require('../assets/images/a.png'), require('../assets/images/b.png'),
+                    require('../assets/images/c.png')],
+
+                img2: [require('../assets/images/0.png'), require('../assets/images/1.png'),
+                    require('../assets/images/2.png')],
+
+                go: {top: '35%', left: '2%'},
             }
         },
         mounted() {
         },
         methods: {
-            tt() {
-                // console.log(111)
-                this.advance()
-            },
+
             scroll(e) {
                 //滚动条拖动的长度
                 const scrollTop = e.target.scrollTop
@@ -47,8 +67,11 @@
                 let Height = scrollHeight - clientHeight
                 //滚动条滚动距离 百分比
                 let scrolldrag = scrollTop / Height
-                let _scrolldrag = (scrolldrag * 100).toFixed(2) * 1
-                this.gkd = _scrolldrag;
+
+                this.rs = (scrolldrag * 600).toFixed(2) * 1
+
+                // this.advance(_scrolldrag)
+
                 // console.log(clientHeight)
 
             },
@@ -56,11 +79,14 @@
             // 长按事件
             // 触摸开始
             gtouchstart(e) {
+
+                // 可视窗口的高度
                 let clientHeight = this.$refs.scroll.clientHeight
+
                 this.startX = e.changedTouches[0].pageX;
                 this.startY = e.changedTouches[0].pageY;
                 this.front = (clientHeight) * (0.4);
-                let div = this.$refs.scroll
+
 
 
                 //执行长按的内容
@@ -68,15 +94,16 @@
                 //     this.loop=0;
                     // console.log(this.front)
                     if (this.startY < this.front) {
+                        this.kg=false;
                         this.flagfind=false
                         this.retreat()
 
-                        console.log( div.scrollTop)
+                        // console.log( div.scrollTop)
                     }else {
+                        this.kg=true;
                         this.flagfind=false
                         this.advance()
-
-                        console.log( div.scrollTop)
+                        // console.log( div.scrollTop)
                     }
 
                 // }, 500);
@@ -84,10 +111,24 @@
             },
             //   前进
             advance() {
-
-                console.log(this.flagfind,'前进了')
+                // console.log(this.rs)
+                // console.log(this.flagfind,'前进了')
                 let div = this.$refs.scroll
                 div.scrollTop += 2
+                 //rs必须要是动态的 rs为
+                 console.log(this.rs)
+                // console.log(_scrolldrag)
+                let arr = [0, 1, 0, 2]
+                this.mark = arr[parseInt(this.rs) % 4];
+
+                //
+                // let i=this.rs
+                // while (arr[i])
+                // {
+                //    console.log(arr[i] + "<br>");
+                //
+                // }
+
 
                 if (this.flagfind===true) return false;
                 window.requestAnimationFrame(this.advance)
@@ -101,10 +142,15 @@
             },
             // 后退
             retreat(){
+
+                let arr = [0, 1, 0, 2]
+                this.mark = arr[parseInt(this.rs) % 4];
+
                 let div = this.$refs.scroll
                 div.scrollTop -= 2
-                console.log('后退了')
-                if (this.flagfind===true) return false;
+                // console.log('后退了')
+                if (this.flagfind===true)
+                    return false;
                 window.requestAnimationFrame(this.retreat)
             },
 
@@ -112,6 +158,8 @@
             // 触摸结束
             triggerReply() {
                 this.flagfind = true;
+                // this.mark=0;
+                // console.log(this.mark)
                 // let div = this.$refs.scroll
                 // const self = this;
                 // clearTimeout(this.timer);
@@ -128,22 +176,6 @@
 
             },
 
-            touchcancel(e){
-                console.log(1123)
-                this.flagfind=false
-            },
-
-            touchmove(e) {
-                e.preventDefault();
-                if (e.changedTouches.length) {
-                    //移动时的坐标
-                    let moveEndX = e.changedTouches[0].pageX;
-                    let moveEndY = e.changedTouches[0].pageY;
-                    //计算当前的坐标跟初始坐标的差值
-                    this.x = moveEndX - this.startX;
-                    this.y = moveEndY - this.startY;
-                }
-            },
 
         },
 
