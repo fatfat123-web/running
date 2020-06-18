@@ -1,11 +1,21 @@
 <template>
     <div class="scroll" ref="scroll" @scroll="scroll">
+        <div class="hint" v-if="hint===true" @click="hint=false">
+            <div class="circle top"></div>
+            <div class="moveup">
+                <span class="arrow arrow-up"></span>
+            </div>
+            <div class="movedown">
+                <span class="arrow arrow-down"></span>
+            </div>
+            <div class="circle bottom"></div>
 
+        </div>
         <div class="main" @touchstart.prevent="gtouchstart" @touchend.prevent="triggerReply">
 
-            <img  src="../assets/images/bj.jpg" style="width: 100%;height: auto;"/>
+            <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;"/>
 
-            <div  style="width:31%;position: fixed;z-index: 999" ref="go" :style="go" v-if="kg===false">
+            <div style="width:31%;position: fixed;z-index: 999" ref="go" :style="go" v-show="kg===false">
 
                 <img style="width: 100%;height: auto" class="element" :src="item" v-for="(item,index) in img2"
                      v-show="index === mark">
@@ -13,7 +23,7 @@
 
             </div>
 
-            <div  style="width:31%;position: fixed;z-index: 999" ref="go" :style="go" v-if="kg===true">
+            <div style="width:31%;position: fixed;z-index: 999" ref="go" :style="go" v-show="kg===true">
 
                 <img style="width: 100%;height: auto" class="element" :src="item" v-for="(item,index) in img"
                      v-show="index === mark">
@@ -29,7 +39,8 @@
         data() {
 
             return {
-                kg:true,
+                hint: true,
+                kg: true,
                 //前进
                 front: null,
                 //左边区域
@@ -40,10 +51,11 @@
                 startY: null,
                 test: 0,
                 timer: null,
-                flagfind:false,
+                flagfind: false,
                 mark: 0,
-                rs:null,
-                ss:null,
+                rs: null,
+                ss: null,
+
                 img: [require('../assets/images/a.png'), require('../assets/images/b.png'),
                     require('../assets/images/c.png')],
 
@@ -56,7 +68,6 @@
         mounted() {
         },
         methods: {
-
             scroll(e) {
                 //滚动条拖动的长度
                 const scrollTop = e.target.scrollTop
@@ -68,122 +79,51 @@
                 let Height = scrollHeight - clientHeight
                 //滚动条滚动距离 百分比
                 let scrolldrag = scrollTop / Height
-
                 this.rs = (scrolldrag * 500).toFixed(2) * 1
-
-
-                 this.ss=parseInt(scrolldrag * 500)
-                // this.advance(_scrolldrag)
-
-                // console.log(clientHeight)
-
             },
-
-            // 长按事件
             // 触摸开始
             gtouchstart(e) {
-
                 // 可视窗口的高度
                 let clientHeight = this.$refs.scroll.clientHeight
-
                 this.startX = e.changedTouches[0].pageX;
                 this.startY = e.changedTouches[0].pageY;
                 this.front = (clientHeight) * (0.4);
-
-
-
-                //执行长按的内容
-                // this.Loop = setTimeout( ()=> {
-                //     this.loop=0;
-                    // console.log(this.front)
-                    if (this.startY < this.front) {
-                        this.kg=false;
-                        this.flagfind=false
-                        this.retreat()
-
-                        // console.log( div.scrollTop)
-                    }else {
-                        this.kg=true;
-                        this.flagfind=false
-                        this.advance()
-                        // console.log( div.scrollTop)
-                    }
-
-                // }, 500);
-                // return false;
+                if (this.startY < this.front) {
+                    this.kg = false;
+                    this.flagfind = false
+                    this.retreat()
+                } else {
+                    this.kg = true;
+                    this.flagfind = false
+                    this.advance()
+                }
             },
             //   前进
             advance() {
-                // console.log(this.rs)
-                // console.log(this.flagfind,'前进了')
                 let div = this.$refs.scroll
                 div.scrollTop += 2
-                 //rs必须要是动态的 rs为
-                 // console.log(this.rs)
-                // console.log(_scrolldrag)
                 let arr = [0, 1, 0, 2]
-                // this.mark = arr[parseInt(this.rs) % 2];
-                 this.mark = arr[parseInt(this.rs) % 4];
-
-                // for (let i in arr) {
-                //     // console.log(arr[i]);
-                //     this.mark =arr[parseInt(i)]
-                //     console.log(this.mark)
-                //
-                // }
-
-                if (this.flagfind===true) return false;
+                this.mark = arr[parseInt(this.rs) % 4];
+                if (this.flagfind === true) return false;
                 window.requestAnimationFrame(this.advance)
-                // this.timer = setInterval(() => {
-                //     console.log(this.timer)
-                //     this.test++;
-                //     console.log(this.test)
-                // }, 1000)
-
-
             },
             // 后退
-            retreat(){
-
-                // let arr = [0, 1, 0, 2]
-                // this.mark = arr[parseInt(this.rs) % 4];
+            retreat() {
                 let arr = [0, 1, 0, 2]
-                // this.mark = arr[parseInt(this.rs) % 2];
                 this.mark = arr[parseInt(this.rs) % 4];
                 let div = this.$refs.scroll
                 div.scrollTop -= 2
-                // console.log('后退了')
-                if (this.flagfind===true)
+                if (this.flagfind === true)
                     return false;
                 window.requestAnimationFrame(this.retreat)
             },
-
-
             // 触摸结束
             triggerReply() {
                 this.flagfind = true;
-
                 this.timer = setInterval(() => {
-                    this.mark=0;
+                    this.mark = 0;
                 }, 100)
-
-                // console.log(this.mark)
-                // let div = this.$refs.scroll
-                // const self = this;
-                // clearTimeout(this.timer);
-                // this.flagfind=true;
-                // //这里click内容
-                // div.scrollTop += 2
-
-                // if (self.Loop !== 0) {
-                //     console.log('点击事件');
-                //     this.flagfind=true;
-                //     console.log(this.flagfind)
-                //     return false;
-                // }
-
             },
-
 
         },
 
@@ -207,8 +147,128 @@
         background-size: 100%;
     }
 
-    .main {
-        position: relative;
+    .hint {
+        z-index: 1199;
+        position: absolute;
+
+        height: 100%;
+        width: 100vw;
+
 
     }
+
+    .main {
+        position: relative;
+    }
+
+
+    .circle {
+        position: absolute;
+        margin-right: 5px;
+        border-radius: 50%;
+        width: 1.5rem;
+        height: 1.5rem;
+        border: 0.05rem slategray solid;
+        background: slategray;
+        opacity: 0.3;
+
+    }
+
+    .top {
+        left: 25%;
+        top: 10%;
+    }
+
+    .bottom {
+        left: 25%;
+        bottom: 10%;
+    }
+
+    .moveup {
+        position: absolute;
+        top: 25%;
+        left: 29%;
+        animation: moveup 3s linear infinite;
+    }
+
+    .movedown {
+        position: absolute;
+        top: 65%;
+        left:29%;
+        animation: movedown 3s linear infinite;
+    }
+    @keyframes moveup {
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+
+    }
+    @keyframes movedown {
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(20px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+
+    }
+
+    .arrow {
+        width: 40px;
+        height: 40px;
+        position: relative;
+        display: inline-block;
+    }
+
+    .arrow:before,
+    .arrow:after {
+        content: '';
+        border-color: transparent;
+        border-style: solid;
+        position: absolute;
+    }
+
+
+    .arrow-up:before {
+        border: none;
+        background-color: #555;
+        height: 50%;
+        width: 30%;
+        top: 50%;
+        left: 35%;
+    }
+
+    .arrow-up:after {
+        left: 0;
+        top: -50%;
+        border-width: 20px 20px;
+        border-bottom-color: #555;
+    }
+
+    .arrow-down:before {
+        border: none;
+        background-color: #555;
+        height: 50%;
+        width: 30%;
+        top: 0;
+        left: 35%;
+    }
+
+    .arrow-down:after {
+        left: 0;
+        top: 50%;
+        border-width: 20px 20px;
+        border-top-color: #555;
+    }
+
+
 </style>
