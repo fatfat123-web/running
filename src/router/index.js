@@ -17,6 +17,12 @@ const routes = [
     component: () => import('@/views/fclick'),
 
   },
+  {
+    path: '/hb',
+    name: 'hb',
+    component: () => import('@/views/hb'),
+
+  },
 
 
 ]
