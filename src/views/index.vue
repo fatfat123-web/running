@@ -1,5 +1,19 @@
 <template>
     <div class="scroll" ref="scroll" @scroll="scroll">
+        <v-touch @swiperight="swiperight" class="wrapper">
+
+            <div class="main animate__animated"
+                 style="background: #b5def4;height: 100vh;width: 100%;position: fixed;left: 0;top: 0;z-index: 2;"
+                  :class="animateEnd ? '' : 'animate__fadeOut'" v-if="mainShow">
+                <p class="font1 animate__animated" v-if="!load"
+                   :class="animate ?' animate__bounceInDown' : 'animate__bounceOutDown'">上滑屏幕进行观看</p>
+                <p class="font2 animate__animated " v-if="!load"
+                   :class="animate ? 'animate__bounceInUp' : 'animate__bounceOutUp'">(请保持手机竖屏)</p>
+            </div>
+
+        </v-touch>
+
+
         <div class="hint" v-if="hint===true" @click="hint=false">
             <div class="circle top"></div>
             <div class="moveup">
@@ -13,9 +27,9 @@
         </div>
         <div class="main" @touchstart.prevent="gtouchstart" @touchend.prevent="triggerReply">
 
-            <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;"/>
+            <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;" @load="imgLoadEnd" />
 
-            <div style="width:31%;position: fixed;z-index: 999" ref="go" :style="go" v-show="kg===false">
+            <div style="width:31%;position: fixed;" ref="go" :style="go" v-show="kg===false">
 
                 <img style="width: 100%;height: auto" class="element" :src="item" v-for="(item,index) in img2"
                      v-show="index === mark">
@@ -23,7 +37,7 @@
 
             </div>
 
-            <div style="width:31%;position: fixed;z-index: 999" ref="go" :style="go" v-show="kg===true">
+            <div style="width:31%;position: fixed;" ref="go" :style="go" v-show="kg===true">
 
                 <img style="width: 100%;height: auto" class="element" :src="item" v-for="(item,index) in img"
                      v-show="index === mark">
@@ -54,7 +68,10 @@
                 flagfind: false,
                 mark: 0,
                 rs: null,
-                ss: null,
+                mainShow: true,
+                animateEnd: true,
+                animate: true,
+                load: true,
 
                 img: [require('../assets/images/a.png'), require('../assets/images/b.png'),
                     require('../assets/images/c.png')],
@@ -81,6 +98,26 @@
                 let scrolldrag = scrollTop / Height
                 this.rs = (scrolldrag * 500).toFixed(2) * 1
             },
+
+            swiperight() {
+                this.animate = false
+                setTimeout(() => {
+                    this.animateEnd = false
+                    setTimeout(() => {
+                        this.mainShow = false
+                        // this.autoPlayAudio()
+                    }, 400)
+                }, 600)
+            },
+
+            imgLoadEnd() {
+                setTimeout(() => {
+                    this.$nextTick(() => {
+                        this.load = false
+                    })
+                }, 10)
+            },
+
             // 触摸开始
             gtouchstart(e) {
                 // 可视窗口的高度
@@ -134,9 +171,7 @@
 <style scoped lang="scss">
     img {
         pointer-events: none; /* 禁止长按图片保存 */
-
     }
-
     .scroll {
         width: 100%;
         height: 100vh;
@@ -147,13 +182,33 @@
         background-size: 100%;
     }
 
-    .hint {
-        z-index: 1199;
+    .font1 {
         position: absolute;
+        top: 40%;
+        left: 50%;
+        width: 10px;
+        height: auto;
+        color: #3d58a2;
+        font-weight: 600;
+        font-size: 18px;
+    }
 
+    .font2 {
+        position: absolute;
+        top: 55%;
+        left: 43%;
+        height: auto;
+        color: #3d58a2;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        writing-mode: tb-rl
+    }
+    .hint {
+        z-index: 1;
+        position: absolute;
         height: 100%;
         width: 100vw;
-
 
     }
 
@@ -194,9 +249,10 @@
     .movedown {
         position: absolute;
         top: 65%;
-        left:29%;
+        left: 29%;
         animation: movedown 3s linear infinite;
     }
+
     @keyframes moveup {
         0% {
             transform: translateY(0px);
@@ -209,6 +265,7 @@
         }
 
     }
+
     @keyframes movedown {
         0% {
             transform: translateY(0px);

@@ -2,8 +2,12 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import animated from 'animate.css'
 import click from './assets/js/click'
 
+Vue.use(animated)
+var VueTouch = require('vue-touch')
+Vue.use(VueTouch, {name: 'v-touch'})
 Vue.config.productionTip = false
 
 new Vue({
