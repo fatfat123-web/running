@@ -121,30 +121,17 @@
                  //rs必须要是动态的 rs为
                  // console.log(this.rs)
                 // console.log(_scrolldrag)
-                let arr = [0, 1, 0, 2]
-                // this.mark = arr[parseInt(this.rs) % 4];
+                // let arr = [0, 1, 0, 2]
+                // this.mark = arr[parseInt(this.rs) % 2];
+                 this.mark = parseInt(this.rs) % 2 ? 1 : 0;
 
-                for (let i in arr) {
-                    // console.log(arr[i]);
-                    this.mark =arr[parseInt(i)]
-                    console.log(this.mark)
-
-                }
+                // for (let i in arr) {
+                //     // console.log(arr[i]);
+                //     this.mark =arr[parseInt(i)]
+                //     console.log(this.mark)
+                //
+                // }
                 console.log(this.mark)
-                // console.log(this.ss)
-                // while (this.rs < 500) {
-                //    console.log(arr)
-                // }
-
-
-                //
-                // let i=this.rs
-                // while (arr[i])
-                // {
-                //    console.log(arr[i] + "<br>");
-                //
-                // }
-
 
                 if (this.flagfind===true) return false;
                 window.requestAnimationFrame(this.advance)
@@ -159,9 +146,10 @@
             // 后退
             retreat(){
 
-                let arr = [0, 1, 0, 2]
-                this.mark = arr[parseInt(this.rs) % 4];
+                // let arr = [0, 1, 0, 2]
+                // this.mark = arr[parseInt(this.rs) % 4];
 
+              this.mark = parseInt(this.rs) % 2 ? 1 : 0;
                 let div = this.$refs.scroll
                 div.scrollTop -= 2
                 // console.log('后退了')
