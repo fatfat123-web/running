@@ -3,7 +3,7 @@
 
         <div class="main" @touchstart.prevent="gtouchstart" @touchend.prevent="triggerReply">
 
-            <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;"/>
+            <img  src="../assets/images/bj.jpg" style="width: 100%;height: auto;"/>
 
             <div  style="width:31%;position: fixed;z-index: 999" ref="go" :style="go" v-if="kg===false">
 
@@ -72,9 +72,9 @@
                 this.rs = (scrolldrag * 500).toFixed(2) * 1
 
 
-                 this.ss=parseInt(scrolldrag * 300)
+                 this.ss=parseInt(scrolldrag * 500)
                 // this.advance(_scrolldrag)
-                 console.log(this.ss)
+
                 // console.log(clientHeight)
 
             },
@@ -122,7 +122,20 @@
                  // console.log(this.rs)
                 // console.log(_scrolldrag)
                 let arr = [0, 1, 0, 2]
-                this.mark = arr[parseInt(this.rs) % 4];
+                // this.mark = arr[parseInt(this.rs) % 4];
+
+                for (let i in arr) {
+                    // console.log(arr[i]);
+                    this.mark =arr[parseInt(i)]
+                    console.log(this.mark)
+
+                }
+                console.log(this.mark)
+                // console.log(this.ss)
+                // while (this.rs < 500) {
+                //    console.log(arr)
+                // }
+
 
                 //
                 // let i=this.rs
