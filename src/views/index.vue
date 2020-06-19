@@ -327,29 +327,44 @@
         -webkit-transform: rotate(90deg);
         -o-transform: rotate(90deg);
         filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+        z-index: 2;
     }
-    .fontone:before,
+    .fontone:before{
+        content: '';
+        width: 0.2rem;
+        height: 0.2rem;
+        position: absolute;
+        top: 12%;
+        left: -15%;
+        border: 0.1rem solid #ff9a9f;
+        border-radius: 50%;
+    }
     .fontone:after {
         content: '';
-        border-color: transparent;
-        border-style: solid;
+        width: 0.2rem;
+        height: 0.2rem;
         position: absolute;
+        top: 12%;
+        left: 103%;
+        border: 0.1rem solid #ff9a9f;
+        border-radius: 50%;
     }
+
     .mv1{
-        animation: runfont 3s linear infinite;
+        animation: runfont 4s linear infinite;
     }
     @keyframes runfont {
         0% {
             transform:rotate(90deg);
         }
        25% {
-           transform:rotate(75deg);
+           transform:rotate(80deg);
         }
         50% {
             transform:rotate(90deg);
         }
         75% {
-            transform:rotate(105deg);
+            transform:rotate(100deg);
         }
         100% {
             transform:rotate(90deg);
@@ -380,24 +395,24 @@
 
     @-webkit-keyframes Glow {
         from {
-            text-shadow: 0 0 10px #fff,
-            0 0 20px #fff,
-            0 0 30px #fff,
-            0 0 40px #fff470,
-            0 0 70px #fff470,
-            0 0 80px #fff470,
-            0 0 100px #fff470,
-            0 0 150px #fff470;
-        }
-        to {
-            text-shadow: 0 0 5px #fff,
+            text-shadow: 0 0 6px #fff,
             0 0 10px #fff,
             0 0 15px #fff,
-            0 0 20px #ff9a9f,
-            0 0 35px #ff9a9f,
-            0 0 40px #ff9a9f,
-            0 0 50px #ff9a9f,
-            0 0 75px #ff9a9f;
+            0 0 20px #fff470,
+            0 0 35px #fff470,
+            0 0 40px #fff470,
+            0 0 50px #fff470,
+            0 0 75px #fff470;
+        }
+        to {
+            text-shadow: 0 0 3px #fff,
+            0 0 5px #fff,
+            0 0 8px #fff,
+            0 0 10px #ff9a9f,
+            0 0 18px #ff9a9f,
+            0 0 22px #ff9a9f,
+            0 0 26px #ff9a9f,
+            0 0 33px #ff9a9f;
         }
     }
     @keyframes Glow {

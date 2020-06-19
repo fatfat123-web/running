@@ -23,6 +23,13 @@ const routes = [
     component: () => import('@/views/hb'),
 
   },
+  {
+    path: '/froth',
+    name: 'froth',
+    component: () => import('@/views/froth'),
+
+  },
+
 
 
 ]
