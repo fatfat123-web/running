@@ -15,6 +15,7 @@
 
         },
         mounted() {
+
             function createBubble() {
                 const section = document.querySelector('section')
                 const createElement = document.createElement('span')
@@ -33,7 +34,10 @@
         },
         methods: {
 
+aa(){
 
+
+}
         }
     }
 </script>

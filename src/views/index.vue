@@ -1,5 +1,6 @@
 <template>
     <div class="scroll" ref="scroll" @scroll="scroll">
+
         <v-touch @swiperight="swiperight" class="wrapper">
 
             <div class="main animate__animated"
@@ -23,10 +24,10 @@
         <div class="hint" v-if="hint===true" @click="hint=false">
             <div class="circle top"></div>
             <div class="moveup">
-                <span class="arrow arrow-up"></span>
+                <div class="arrow arrow-up"></div>
             </div>
             <div class="movedown">
-                <span class="arrow arrow-down"></span>
+                <div class="arrow arrow-down"></div>
             </div>
             <div class="circle bottom"></div>
 
@@ -63,8 +64,7 @@
                 kg: true,
                 //前进
                 front: null,
-                //左边区域
-                rear: null,
+                off:true,
                 x: null,
                 Y: null,
                 startX: null,
@@ -91,6 +91,37 @@
         mounted() {
         },
         methods: {
+
+            pause(val) {
+
+                // console.log(this.$refs.music)
+                if (this.$refs.music !== null) {
+                    //检测播放是否已暂停.this.$refs.music.paused 在播放器播放时返回false.
+                    // console.log(this.$refs.music.paused);
+                    if (this.$refs.music.paused) {
+                        this.$refs.music.play();// 这个就是播放
+                        this.off = true
+
+                    } else {
+                        if (val) {
+                            this.$refs.music.pause();// 这个就是暂停
+                            this.off = false
+                        }
+                    }
+                }
+            },
+            autoPlayAudio() {
+                //把this的指向给存了起来，使得try里面的pause调用上面的pause方法
+                const _this = this
+                try {
+                    WeixinJSBridge.invoke('WeixinJSBridgeReady', {}, function (e) {
+                        _this.pause()
+                    });
+                } catch (e) {
+                    _this.pause()
+                }
+            },
+
             scroll(e) {
                 //滚动条拖动的长度
                 const scrollTop = e.target.scrollTop
@@ -437,4 +468,46 @@
             0 0 33px #ff9a9f;
         }
     }
+    .music {
+
+        position: absolute;
+        width: 1.9rem;
+        height: 1.5rem;
+        border: 5px solid #e5f397;
+        border-bottom: 0px;
+        border-top-left-radius: 110px;
+        border-top-right-radius: 110px;
+
+        span {
+            width: 50px;
+            height: 30px;
+            font-size: 11px;
+            display: block;
+            margin-top: 125%;
+            letter-spacing: 2px;
+            margin-left: -4px;
+        }
+
+    }
+
+
+    .music:before {
+        right: -8px;
+    }
+
+    .music:after {
+        left: -7px;
+    }
+
+    .music:before, .music:after {
+
+        content: '';
+        position: absolute;
+        bottom: -14px;
+        width: 0.7rem;
+        height: 1rem;
+        background-color: #f8ffbe;
+        border-radius: 5px;
+    }
+
 </style>
