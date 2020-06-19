@@ -1,14 +1,27 @@
 <template>
     <div class="scroll" ref="scroll" @scroll="scroll">
+        <div style="position: fixed;top:3.7%;right:23.1%;z-index: 999;">
+            <div @click="pause(true)" class="music">
 
+                <div v-if="off===true">
+                    <span style="color: white">关音乐</span>
+                </div>
+                <div v-if="off===false">
+                    <span style="color: white">开音乐</span>
+                </div>
+
+            </div>
+            <!--            controls  -->
+            <audio ref="music" id="music" src="../assets/music/cn.mp3" loop="loop" preload autoplay="autoplay"></audio>
+        </div>
         <v-touch @swiperight="swiperight" class="wrapper">
 
             <div class="main animate__animated"
                  style="background: #b5def4;height: 100vh;width: 100%;position: fixed;left: 0;top: 0;z-index: 2;"
                   :class="animateEnd ? '' : 'animate__fadeOut'" v-if="mainShow">
 
-                <div class="fontone mv1" v-if="!load" style="left: 30%;" >上滑屏幕进行观看</div>
-                <div class="container" style="left:11%;">
+                <div class="fontone mv1" v-if="!load" style="left: 30%;z-index: 99" >上滑屏幕进行观看</div>
+                <div class="container" style="left:11%;z-index: 99">
                     <p>(请保持手机横屏)</p>
                 </div>
 
@@ -55,6 +68,7 @@
 </template>
 
 <script>
+    import froth from './froth'
     export default {
         name: "index",
         data() {
@@ -89,6 +103,10 @@
             }
         },
         mounted() {
+            this.autoPlayAudio();
+        },
+        components: {
+            froth,
         },
         methods: {
 
