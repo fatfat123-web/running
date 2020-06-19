@@ -10,7 +10,7 @@
         data(){
 
             return{
-
+                ctx:null,
 
             }
         },
@@ -37,19 +37,19 @@
                     y,
                 }
             }
-            let WIDTH,HEIGHT,cxt,raf,points;
+            var WIDTH,HEIGHT,cxt,raf,points;
             window.onload = () => {
                 WIDTH = document.documentElement.clientWidth;
                 HEIGHT = document.documentElement.clientHeight;
                 const canvas =  document.getElementById('canvas');
                 canvas.width = WIDTH;
                 canvas.height = HEIGHT;
-                ctx = canvas.getContext('2d');
+                this.ctx = canvas.getContext('2d');
                 points =  createViceCanvas();
                 init()
             }
             function init() {
-                ctx.clearRect(0,0,WIDTH,HEIGHT)
+                this.ctx.clearRect(0,0,WIDTH,HEIGHT)
                 points.forEach((value) => { //
                     value.draw();
                 })
@@ -85,7 +85,7 @@
                     this.initY = Math.random() * HEIGHT; // 点位随机在画布中的y坐标
                 }
                 draw(){ // 绘制点位
-                    ctx.beginPath();
+                    this.ctx.beginPath();
                     const {x, y} = threeBezier( // 贝塞尔曲线，获取每一个tick点位所在位置
                         this.item,
                         [this.initX,this.initY],
@@ -93,10 +93,10 @@
                         [this.x,this.y],
                         [this.x, this.y]
                     )
-                    ctx.arc(x, y, 2, 0, 2 * Math.PI, true);
-                    ctx.fillStyle="orangered"
-                    ctx.fill();
-                    ctx.closePath();
+                    this.arc(x, y, 2, 0, 2 * Math.PI, true);
+                    this.ctx.fillStyle="orangered"
+                    this.ctx.fill();
+                    this.ctx.closePath();
                     this.speed(); // 点位下次tick绘制时的坐标
                 }
                 speed() { // 每个点位绘制后的坐标

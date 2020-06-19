@@ -5,10 +5,16 @@
             <div class="main animate__animated"
                  style="background: #b5def4;height: 100vh;width: 100%;position: fixed;left: 0;top: 0;z-index: 2;"
                   :class="animateEnd ? '' : 'animate__fadeOut'" v-if="mainShow">
-                <p class="font1 animate__animated" v-if="!load"
-                   :class="animate ?' animate__bounceInDown' : 'animate__bounceOutDown'">上滑屏幕进行观看</p>
-                <p class="font2 animate__animated " v-if="!load"
-                   :class="animate ? 'animate__bounceInUp' : 'animate__bounceOutUp'">(请保持手机竖屏)</p>
+
+                <div class="fontone mv1" v-if="!load" style="left: 30%;" >上滑屏幕进行观看</div>
+                <div class="container" style="left:11%;">
+                    <p>(请保持手机横屏)</p>
+                </div>
+
+<!--                <p class="font1 animate__animated" v-if="!load"-->
+<!--                   :class="animate ?' animate__bounceInRight' : 'animate__bounceOutDown'">上滑屏幕进行观看</p>-->
+<!--                <p class="font2 animate__animated " v-if="!load"-->
+<!--                   :class="animate ? 'animate__bounceInDown' : 'animate__bounceOutUp'">(请保持手机横屏)</p>-->
             </div>
 
         </v-touch>
@@ -100,6 +106,8 @@
             },
 
             swiperight() {
+                let div = this.$refs.scroll
+                div.scrollTop += 2
                 this.animate = false
                 setTimeout(() => {
                     this.animateEnd = false
@@ -182,28 +190,7 @@
         background-size: 100%;
     }
 
-    .font1 {
-        position: absolute;
-        top: 40%;
-        left: 50%;
-        width: 10px;
-        height: auto;
-        color: #3d58a2;
-        font-weight: 600;
-        font-size: 18px;
-    }
 
-    .font2 {
-        position: absolute;
-        top: 55%;
-        left: 43%;
-        height: auto;
-        color: #3d58a2;
-        font-size: 14px;
-        font-weight: 600;
-        letter-spacing: 2px;
-        writing-mode: tb-rl
-    }
     .hint {
         z-index: 1;
         position: absolute;
@@ -327,5 +314,112 @@
         border-top-color: #555;
     }
 
+    .fontone{
+        letter-spacing: 2px;
+        font-weight: 500;
+        position: absolute;
+        font-size: 0.4rem;
+        top: 47%;
+        color: white;
+        transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+    }
+    .fontone:before,
+    .fontone:after {
+        content: '';
+        border-color: transparent;
+        border-style: solid;
+        position: absolute;
+    }
+    .mv1{
+        animation: runfont 3s linear infinite;
+    }
+    @keyframes runfont {
+        0% {
+            transform:rotate(90deg);
+        }
+       25% {
+           transform:rotate(75deg);
+        }
+        50% {
+            transform:rotate(90deg);
+        }
+        75% {
+            transform:rotate(105deg);
+        }
+        100% {
+            transform:rotate(90deg);
+        }
+    }
+    .container {
+        font-weight: 400;
+        letter-spacing: 3px;
+        position: absolute;
+        top: 47%;
+        p {
+            text-align: center;
+            color: #fff;
+            font-size: 0.4em;
+            -webkit-transition: all 1.5s ease;
+            transition: all 1.5s ease;
+            -webkit-animation: Glow 1.5s ease infinite alternate;
+            animation: Glow 1.5s ease infinite alternate;
+            transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+            -moz-transform: rotate(90deg);
+            -webkit-transform: rotate(90deg);
+            -o-transform: rotate(90deg);
+            filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+        }
+    }
 
+
+    @-webkit-keyframes Glow {
+        from {
+            text-shadow: 0 0 10px #fff,
+            0 0 20px #fff,
+            0 0 30px #fff,
+            0 0 40px #fff470,
+            0 0 70px #fff470,
+            0 0 80px #fff470,
+            0 0 100px #fff470,
+            0 0 150px #fff470;
+        }
+        to {
+            text-shadow: 0 0 5px #fff,
+            0 0 10px #fff,
+            0 0 15px #fff,
+            0 0 20px #ff9a9f,
+            0 0 35px #ff9a9f,
+            0 0 40px #ff9a9f,
+            0 0 50px #ff9a9f,
+            0 0 75px #ff9a9f;
+        }
+    }
+    @keyframes Glow {
+        from {
+            text-shadow: 0 0 6px #fff,
+            0 0 10px #fff,
+            0 0 15px #fff,
+            0 0 20px #fff470,
+            0 0 35px #fff470,
+            0 0 40px #fff470,
+            0 0 50px #fff470,
+            0 0 75px #fff470;
+        }
+        to {
+            text-shadow: 0 0 3px #fff,
+            0 0 5px #fff,
+            0 0 8px #fff,
+            0 0 10px #ff9a9f,
+            0 0 18px #ff9a9f,
+            0 0 22px #ff9a9f,
+            0 0 26px #ff9a9f,
+            0 0 33px #ff9a9f;
+        }
+    }
 </style>
