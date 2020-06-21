@@ -14,22 +14,19 @@
             <!--            controls  -->
             <audio ref="music" id="music" src="../assets/music/cn.mp3" loop="loop" preload autoplay="autoplay"></audio>
         </div>
-        <v-touch @swiperight="swiperight" class="wrapper">
+        <froth class="froth" v-if="first"></froth>
+        <v-touch @swiperight="swiperight">
 
             <div class="main animate__animated"
-                 style="background: #b5def4;height: 100vh;width: 100%;position: fixed;left: 0;top: 0;z-index: 2;"
-                  :class="animateEnd ? '' : 'animate__fadeOut'" v-if="mainShow">
+                 style="height: 100vh;width: 100%;position: fixed;left: 0;top: 0;z-index: 2;"
+                 :style="{background:`url(${img3})`,backgroundSize:'100% 100%'}" :class="animateEnd ? '' : 'animate__fadeOut'" v-if="mainShow&&first===false">
 
-                <div class="fontone mv1" v-if="!load" style="left: 30%;z-index: 99" >上滑屏幕进行观看</div>
+                <div class="fontone mv1" v-if="!load" style="left: 30%;z-index: 99">上滑屏幕进行观看</div>
                 <div class="container" style="left:11%;z-index: 99">
                     <p>(请保持手机横屏)</p>
                 </div>
-
-<!--                <p class="font1 animate__animated" v-if="!load"-->
-<!--                   :class="animate ?' animate__bounceInRight' : 'animate__bounceOutDown'">上滑屏幕进行观看</p>-->
-<!--                <p class="font2 animate__animated " v-if="!load"-->
-<!--                   :class="animate ? 'animate__bounceInDown' : 'animate__bounceOutUp'">(请保持手机横屏)</p>-->
             </div>
+
 
         </v-touch>
 
@@ -47,7 +44,7 @@
         </div>
         <div class="main" @touchstart.prevent="gtouchstart" @touchend.prevent="triggerReply">
 
-            <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;" @load="imgLoadEnd" />
+            <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;" @load="imgLoadEnd"/>
 
             <div style="width:31%;position: fixed;" ref="go" :style="go" v-show="kg===false">
 
@@ -62,13 +59,13 @@
                 <img style="width: 100%;height: auto" class="element" :src="item" v-for="(item,index) in img"
                      v-show="index === mark">
             </div>
-
         </div>
     </div>
 </template>
 
 <script>
     import froth from './froth'
+
     export default {
         name: "index",
         data() {
@@ -78,7 +75,7 @@
                 kg: true,
                 //前进
                 front: null,
-                off:true,
+                off: true,
                 x: null,
                 Y: null,
                 startX: null,
@@ -92,24 +89,39 @@
                 animateEnd: true,
                 animate: true,
                 load: true,
+                time: 10,
+                first: true,
 
                 img: [require('../assets/images/a.png'), require('../assets/images/b.png'),
                     require('../assets/images/c.png')],
 
                 img2: [require('../assets/images/0.png'), require('../assets/images/1.png'),
                     require('../assets/images/2.png')],
-
+                img3: require('../assets/images/bj2.png'),
                 go: {top: '35%', left: '2%'},
             }
         },
         mounted() {
+            this.jump()
             this.autoPlayAudio();
+
         },
         components: {
             froth,
         },
         methods: {
+            jump() {
+                let timer = setInterval(() => {
+                    this.time--
+                    if (this.time === 0) {
+                        this.first = false;
+                        clearInterval(timer)
+                        // this.$router.push('/')
+                    }
+                }, 1000)
 
+
+            },
             pause(val) {
 
                 // console.log(this.$refs.music)
@@ -151,7 +163,7 @@
                 let Height = scrollHeight - clientHeight
                 //滚动条滚动距离 百分比
                 let scrolldrag = scrollTop / Height
-                this.rs = (scrolldrag * 500).toFixed(2) * 1
+                this.rs = (scrolldrag * 400).toFixed(2) * 1
             },
 
             swiperight() {
@@ -162,7 +174,7 @@
                     this.animateEnd = false
                     setTimeout(() => {
                         this.mainShow = false
-                        // this.autoPlayAudio()
+                        this.autoPlayAudio()
                     }, 400)
                 }, 600)
             },
@@ -229,6 +241,31 @@
     img {
         pointer-events: none; /* 禁止长按图片保存 */
     }
+
+    .froth {
+
+
+        height: 100vh;
+        width: 100%;
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 4;
+        background: url(../assets/images/bj1.png) no-repeat;
+        background-size: 100% 100%;
+    }
+
+    /*.slide {*/
+    /*    background: black;*/
+    /*    height: 100vh;*/
+    /*    width: 100%;*/
+    /*    position: fixed;*/
+    /*    left: 0;*/
+    /*    top: 0;*/
+    /*    z-index: 2;*/
+    /*  */
+    /*}*/
+
     .scroll {
         width: 100%;
         height: 100vh;
@@ -363,7 +400,7 @@
         border-top-color: #555;
     }
 
-    .fontone{
+    .fontone {
         letter-spacing: 2px;
         font-weight: 500;
         position: absolute;
@@ -378,7 +415,8 @@
         filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
         z-index: 2;
     }
-    .fontone:before{
+
+    .fontone:before {
         content: '';
         width: 0.2rem;
         height: 0.2rem;
@@ -388,6 +426,7 @@
         border: 0.1rem solid #ff9a9f;
         border-radius: 50%;
     }
+
     .fontone:after {
         content: '';
         width: 0.2rem;
@@ -399,31 +438,34 @@
         border-radius: 50%;
     }
 
-    .mv1{
+    .mv1 {
         animation: runfont 4s linear infinite;
     }
+
     @keyframes runfont {
         0% {
-            transform:rotate(90deg);
+            transform: rotate(90deg);
         }
-       25% {
-           transform:rotate(80deg);
+        25% {
+            transform: rotate(80deg);
         }
         50% {
-            transform:rotate(90deg);
+            transform: rotate(90deg);
         }
         75% {
-            transform:rotate(100deg);
+            transform: rotate(100deg);
         }
         100% {
-            transform:rotate(90deg);
+            transform: rotate(90deg);
         }
     }
+
     .container {
         font-weight: 400;
         letter-spacing: 3px;
         position: absolute;
         top: 47%;
+
         p {
             text-align: center;
             color: #fff;
@@ -464,6 +506,7 @@
             0 0 33px #ff9a9f;
         }
     }
+
     @keyframes Glow {
         from {
             text-shadow: 0 0 6px #fff,
@@ -486,13 +529,14 @@
             0 0 33px #ff9a9f;
         }
     }
+
     .music {
 
         position: absolute;
         width: 1.9rem;
         height: 1.5rem;
         border: 5px solid #e5f397;
-        border-bottom: 0px;
+        border-bottom: 0;
         border-top-left-radius: 110px;
         border-top-right-radius: 110px;
 

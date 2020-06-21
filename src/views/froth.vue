@@ -19,9 +19,9 @@
             function createBubble() {
                 const section = document.querySelector('section')
                 const createElement = document.createElement('span')
-                var size = Math.random() * 60;
-                createElement.style.width = 50 + size + 'px';
-                createElement.style.height = 50 + size + 'px';
+                let size = Math.random() * 60;
+                createElement.style.width = 10 + size + 'px';
+                createElement.style.height = 10 + size + 'px';
                 createElement.style.top= Math.random() * innerHeight + "px";
                 section.appendChild(createElement);
                 setTimeout(() => {
@@ -35,10 +35,7 @@
         },
         methods: {
 
-            aa() {
 
-
-            }
         }
     }
 </script>
@@ -51,7 +48,6 @@
         width: 100%;
         height: 100vh;
         overflow: hidden;
-
         display: flex;
         justify-content: center;
         align-items: center;
