@@ -1,17 +1,17 @@
 <template>
     <div class="scroll" ref="scroll" @scroll="scroll">
         <div style="position: fixed;top:3.7%;right:23.1%;z-index: 999;">
-            <div @click="pause(true)" class="music">
 
-                <div v-if="off===true">
-                    <span style="color: white">关音乐</span>
+            <div class="rotation"  >{{music ? '关音乐' : '开音乐'}}</div>
+            <div class="loader1"   @click="pause(true)">
+                <div class="loop">
+                    <div class="ring"></div>
                 </div>
-                <div v-if="off===false">
-                    <span style="color: white">开音乐</span>
+                <div class="loop">
+                    <div class="ring"></div>
                 </div>
-
             </div>
-            <!--            controls  -->
+
             <audio ref="music" id="music" src="../assets/music/cn.mp3" loop="loop" preload autoplay="autoplay"></audio>
         </div>
         <froth class="froth" v-if="first"></froth>
@@ -71,6 +71,7 @@
         data() {
 
             return {
+                music:true,
                 hint: true,
                 kg: true,
                 //前进
@@ -89,7 +90,7 @@
                 animateEnd: true,
                 animate: true,
                 load: true,
-                time: 10,
+                time: 5,
                 first: true,
 
                 img: [require('../assets/images/a.png'), require('../assets/images/b.png'),
@@ -102,6 +103,7 @@
             }
         },
         mounted() {
+
             this.jump()
             this.autoPlayAudio();
 
@@ -110,12 +112,14 @@
             froth,
         },
         methods: {
+
             jump() {
                 let timer = setInterval(() => {
                     this.time--
                     if (this.time === 0) {
                         this.first = false;
                         clearInterval(timer)
+                        // clearInterval(this.time)
                         // this.$router.push('/')
                     }
                 }, 1000)
@@ -130,12 +134,14 @@
                     // console.log(this.$refs.music.paused);
                     if (this.$refs.music.paused) {
                         this.$refs.music.play();// 这个就是播放
-                        this.off = true
+                        this.music=true
+                        console.log(this.music)
 
                     } else {
                         if (val) {
                             this.$refs.music.pause();// 这个就是暂停
-                            this.off = false
+                            this.music=false
+                            console.log(this.music)
                         }
                     }
                 }
@@ -184,7 +190,7 @@
                     this.$nextTick(() => {
                         this.load = false
                     })
-                }, 10)
+                }, 500)
             },
 
             // 触摸开始
@@ -530,46 +536,117 @@
         }
     }
 
-    .music {
+    .loader1 {
 
+        width: 5em;
+        height: 5em;
+        font-size: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 5%;
+        right: 10%;
+        position: fixed;
+        letter-spacing: 1px;
+        color: white;
+        border: 1px dotted pink;
+        border-radius: 50%;
+    }
+
+    .loader1:active {
+        background: yellow;
+        opacity: 0.5;
+        box-shadow: 5px 5px 20px 10px rgba(255, 255, 0, 0.5)
+    }
+
+    .loader1 .loop {
         position: absolute;
-        width: 1.9rem;
-        height: 1.5rem;
-        border: 5px solid #e5f397;
-        border-bottom: 0;
-        border-top-left-radius: 110px;
-        border-top-right-radius: 110px;
-
-        span {
-            width: 50px;
-            height: 30px;
-            font-size: 11px;
-            display: block;
-            margin-top: 125%;
-            letter-spacing: 2px;
-            margin-left: -4px;
-        }
-
+        border-radius: 50%;
+        border-style: solid;
+        animation: animate2 3s linear infinite;
     }
 
-
-    .music:before {
-        right: -8px;
+    .loader1 .loop:nth-child(1) {
+        width: 100%;
+        height: 100%;
+        color: gold;
+        border-color: currentColor transparent transparent currentColor;
+        border-width: 0.2em 0.2em 0em 0em;
+        --deg: -45deg;
+        animation-direction: normal;
     }
 
-    .music:after {
-        left: -7px;
+    .loader1 .loop:nth-child(2) {
+        width: 70%;
+        height: 70%;
+        color: lime;
+        border-color: currentColor currentColor transparent transparent;
+        border-width: 0.2em 0em 0em 0.2em;
+        --deg: -135deg;
+        animation-direction: reverse;
     }
 
-    .music:before, .music:after {
+    .loader1 .loop .ring {
+        position: absolute;
+        width: 50%;
+        height: 0.1em;
+        top: 50%;
+        left: 50%;
+        background-color: transparent;
+        transform: rotate(var(--deg));
+        transform-origin: left;
+    }
 
+    .loader1 .loop .ring::before {
+        position: absolute;
+        top: -0.5em;
+        right: -0.5em;
         content: '';
-        position: absolute;
-        bottom: -14px;
-        width: 0.7rem;
-        height: 1rem;
-        background-color: #f8ffbe;
-        border-radius: 5px;
+        width: 1em;
+        height: 1em;
+        background-color: currentColor;
+        border-radius: 50%;
+        box-shadow: 0 0 2em,
+        0 0 4em,
+        0 0 6em,
+        0 0 8em,
+        0 0 10em,
+        0 0 0 0.5em rgba(255, 255, 0, 0.1);
     }
 
+    @keyframes animate2 {
+        to {
+            transform: rotate(1turn);
+        }
+    }
+
+    .rotation {
+        transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+        color: white;
+        font-weight: 300;
+        width: 5em;
+        height: 5em;
+        font-size: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        top: 5%;
+        right: 10%;
+        position: fixed;
+        letter-spacing: 2px
+    }
+
+    .reminder {
+        top: 23%;
+        right: 10%;
+        position: fixed;
+        width: 5em;
+        height: 5em;
+
+    }
 </style>
