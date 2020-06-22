@@ -26,9 +26,10 @@
                     玉北同城加速融合
                 </div>
                 <div class="container" v-if="!load" style="left:28%;z-index: 99;">
-                   大城崛起在即
+                    大城崛起在即
                 </div>
-                <img src="../assets/images/hand.gif" style=" position: absolute;left: 22%;top: 80%;width: 2.5rem;height: auto">
+                <img src="../assets/images/hand.gif"
+                     style=" position: absolute;left: 22%;top: 80%;width: 2.5rem;height: auto">
             </div>
 
 
@@ -36,12 +37,19 @@
 
 
         <div class="hint" v-if="hint===true" @click="hint=false">
-            <div class="circle top"></div>
+            <div class="circle top">
+            </div>
+            <div class="pen" style="  top:11%;left: 27.3%;"></div>
+            <div class="pen" style="  top:80.8%;left: 27.3%;"></div>
+            <img src="../assets/images/hint.gif"  style=" position: absolute;left: 32%;top: 27%;width: 2.5rem;height: auto" >
             <div class="moveup">
-                <div class="arrow arrow-up"></div>
+                <div class="arrow arrow-up">
+                </div>
             </div>
             <div class="movedown">
-                <div class="arrow arrow-down"></div>
+                <div class="arrow arrow-down">
+
+                </div>
             </div>
             <div class="circle bottom"></div>
 
@@ -52,7 +60,7 @@
 
             <div style="width:31%;position: fixed;" ref="go" :style="go" v-show="kg===false">
 
-                <img style="width: 100%;height: auto"  :src="item" v-for="(item,index) in img2"
+                <img style="width: 100%;height: auto" :src="item" v-for="(item,index) in img2"
                      v-show="index === mark">
 
 
@@ -70,6 +78,7 @@
 <script>
     import froth from './froth'
     import wxapi from '../../common/wxapi.js'
+
     export default {
         name: "index",
         data() {
@@ -332,8 +341,17 @@
         border-radius: 50%;
         width: 1.5rem;
         height: 1.5rem;
-        border: 0.05rem slategray solid;
-        background: slategray;
+        opacity: 0.3;
+        box-shadow: 5px 5px 20px 10px rgba(255, 255, 0, 1);
+    }
+
+    .pen {
+
+        position: absolute;
+        border-radius: 50%;
+        width: 1.1rem;
+        height: 1.1rem;
+        border: 0.05rem #ffe793 solid;
         opacity: 0.3;
 
     }

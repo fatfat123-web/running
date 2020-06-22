@@ -11,18 +11,7 @@ const routes = [
     component: () => import('@/views/index'),
 
   },
-  {
-    path: '/fclick',
-    name: 'fclick',
-    component: () => import('@/views/fclick'),
 
-  },
-  {
-    path: '/hb',
-    name: 'hb',
-    component: () => import('@/views/hb'),
-
-  },
   {
     path: '/froth',
     name: 'froth',
