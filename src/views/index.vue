@@ -20,7 +20,7 @@
             <div class="main animate__animated"
                  style="height: 100vh;width: 100%;position: fixed;left: 0;top: 0;z-index: 2;"
                  :style="{background:`url(${img3})`,backgroundSize:'100% 100%'}"
-                 :class="animateEnd ? '' : 'animate__fadeOut'" v-show="mainShow&&first===false">
+                 :class="animateEnd ? '' : 'animate__fadeOut'" v-show="mainShow">
 
                 <div class="container" v-if="!load" style="left:14%;z-index: 99">
                     玉北同城加速融合
@@ -69,7 +69,7 @@
 
 <script>
     import froth from './froth'
-
+    import wxapi from '../../common/wxapi.js'
     export default {
         name: "index",
         data() {
@@ -110,12 +110,52 @@
 
             this.jump()
             this.autoPlayAudio();
+            wxapi.wxRegister(this.wxRegCallback);
 
         },
         components: {
             froth,
         },
         methods: {
+            //微信的方法
+            wxRegCallback() {
+                // 用于微信JS-SDK回调
+                this.wxShareTimeline()
+                this.wxShareAppMessage()
+            },
+            wxShareTimeline() {
+                // 微信自定义分享到朋友圈
+                let option = {
+                    title: '玉林中鼎~~~？！', // 分享标题, 请自行替换
+                    link: window.location.href.split('#')[0], // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: 'logo.png', // 分享图标, 请自行替换，需要绝对路径
+                    success: () => {
+                        alert('分享成功')
+                    },
+                    error: () => {
+                        alert('已取消分享')
+                    }
+                }
+                // 将配置注入通用方法
+                wxapi.ShareTimeline(option)
+            },
+            wxShareAppMessage() {
+                // 微信自定义分享给朋友
+                let option = {
+                    title: '玉林中鼎~~~', // 分享标题, 请自行替换
+                    desc: '这里要写什么呢', // 分享描述, 请自行替换
+                    link: window.location.href.split('#')[0], // 分享链接，根据自身项目决定是否需要split
+                    imgUrl: '', // 分享图标, 请自行替换，需要绝对路径
+                    success: () => {
+                        alert('分享成功')
+                    },
+                    error: () => {
+                        alert('已取消分享')
+                    }
+                }
+                // 将配置注入通用方法
+                wxapi.ShareAppMessage(option)
+            },
 
             jump() {
                 let timer = setInterval(() => {
@@ -123,8 +163,6 @@
                     if (this.time === 0) {
                         this.first = false;
                         clearInterval(timer)
-                        // clearInterval(this.time)
-                        // this.$router.push('/')
                     }
                 }, 1000)
 
@@ -254,7 +292,6 @@
 
     .froth {
 
-
         height: 100vh;
         width: 100%;
         position: fixed;
@@ -264,17 +301,6 @@
         background: url(../assets/images/bj1.png) no-repeat;
         background-size: 100% 100%;
     }
-
-    /*.slide {*/
-    /*    background: black;*/
-    /*    height: 100vh;*/
-    /*    width: 100%;*/
-    /*    position: fixed;*/
-    /*    left: 0;*/
-    /*    top: 0;*/
-    /*    z-index: 2;*/
-    /*  */
-    /*}*/
 
     .scroll {
         width: 100%;
