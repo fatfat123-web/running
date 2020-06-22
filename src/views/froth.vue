@@ -2,7 +2,7 @@
 
     <section>
 
-<!--        <h2>Bubbles</h2>-->
+        <!--                <h2>Bubbles</h2>-->
     </section>
 
 </template>
@@ -11,31 +11,29 @@
     export default {
         name: "froth",
         data() {
-            return {}
+            return {
+                timer: null
+            }
 
         },
         mounted() {
-
             function createBubble() {
                 const section = document.querySelector('section')
                 const createElement = document.createElement('span')
                 let size = Math.random() * 60;
                 createElement.style.width = 10 + size + 'px';
                 createElement.style.height = 10 + size + 'px';
-                createElement.style.top= Math.random() * innerHeight + "px";
+                createElement.style.top = Math.random() * innerHeight + "px";
                 section.appendChild(createElement);
                 setTimeout(() => {
-
                     createElement.remove()
-
                 }, 4000)
             }
 
-            setInterval(createBubble, 50)
+            this.timer = setInterval(createBubble, 100)
         },
-        methods: {
-
-
+        beforeDestroy() {
+            clearInterval(this.timer)
         }
     }
 </script>
