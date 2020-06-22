@@ -52,7 +52,7 @@
 
             <div style="width:31%;position: fixed;" ref="go" :style="go" v-show="kg===false">
 
-                <img style="width: 100%;height: auto" class="element" :src="item" v-for="(item,index) in img2"
+                <img style="width: 100%;height: auto"  :src="item" v-for="(item,index) in img2"
                      v-show="index === mark">
 
 
@@ -103,7 +103,7 @@
                 img2: [require('../assets/images/0.png'), require('../assets/images/1.png'),
                     require('../assets/images/2.png')],
                 img3: require('../assets/images/bj2.png'),
-                go: {top: '35%', left: '2%'},
+                go: {top: '35%', left: '8%'},
             }
         },
         mounted() {
@@ -173,7 +173,7 @@
                 let Height = scrollHeight - clientHeight
                 //滚动条滚动距离 百分比
                 let scrolldrag = scrollTop / Height
-                this.rs = (scrolldrag * 400).toFixed(2) * 1
+                this.rs = (scrolldrag * 200).toFixed(2) * 1
             },
 
             swiperight() {
