@@ -2,8 +2,8 @@
     <div class="scroll" ref="scroll" @scroll="scroll">
         <div style="position: fixed;top:3.7%;right:23.1%;z-index: 999;">
 
-            <div class="rotation"  >{{music ? '关音乐' : '开音乐'}}</div>
-            <div class="loader1"   @click="pause(true)">
+            <div class="rotation">{{music ? '关音乐' : '开音乐'}}</div>
+            <div class="loader1" @click="pause(true)">
                 <div class="loop">
                     <div class="ring"></div>
                 </div>
@@ -19,12 +19,16 @@
 
             <div class="main animate__animated"
                  style="height: 100vh;width: 100%;position: fixed;left: 0;top: 0;z-index: 2;"
-                 :style="{background:`url(${img3})`,backgroundSize:'100% 100%'}" :class="animateEnd ? '' : 'animate__fadeOut'" v-if="mainShow&&first===false">
+                 :style="{background:`url(${img3})`,backgroundSize:'100% 100%'}"
+                 :class="animateEnd ? '' : 'animate__fadeOut'" v-show="mainShow&&first===false">
 
-                <div class="fontone mv1" v-if="!load" style="left: 30%;z-index: 99">上滑屏幕进行观看</div>
-                <div class="container" style="left:11%;z-index: 99">
-                    <p>(请保持手机横屏)</p>
+                <div class="container" v-if="!load" style="left:14%;z-index: 99">
+                    玉北同城加速融合
                 </div>
+                <div class="container" v-if="!load" style="left:28%;z-index: 99;">
+                   大城崛起在即
+                </div>
+                <img src="../assets/images/hand.gif" style=" position: absolute;left: 22%;top: 80%;width: 2.5rem;height: auto">
             </div>
 
 
@@ -71,7 +75,7 @@
         data() {
 
             return {
-                music:true,
+                music: true,
                 hint: true,
                 kg: true,
                 //前进
@@ -134,13 +138,13 @@
                     // console.log(this.$refs.music.paused);
                     if (this.$refs.music.paused) {
                         this.$refs.music.play();// 这个就是播放
-                        this.music=true
+                        this.music = true
                         console.log(this.music)
 
                     } else {
                         if (val) {
                             this.$refs.music.pause();// 这个就是暂停
-                            this.music=false
+                            this.music = false
                             console.log(this.music)
                         }
                     }
@@ -471,46 +475,20 @@
         letter-spacing: 3px;
         position: absolute;
         top: 47%;
+        text-align: center;
+        color: #fff;
+        font-size: 0.4em;
+        -webkit-transition: all 1.5s ease;
+        transition: all 1.5s ease;
+        -webkit-animation: Glow 1.5s ease infinite alternate;
+        animation: Glow 1.5s ease infinite alternate;
+        transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
 
-        p {
-            text-align: center;
-            color: #fff;
-            font-size: 0.4em;
-            -webkit-transition: all 1.5s ease;
-            transition: all 1.5s ease;
-            -webkit-animation: Glow 1.5s ease infinite alternate;
-            animation: Glow 1.5s ease infinite alternate;
-            transform: rotate(90deg);
-            -ms-transform: rotate(90deg);
-            -moz-transform: rotate(90deg);
-            -webkit-transform: rotate(90deg);
-            -o-transform: rotate(90deg);
-            filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
-        }
-    }
-
-
-    @-webkit-keyframes Glow {
-        from {
-            text-shadow: 0 0 6px #fff,
-            0 0 10px #fff,
-            0 0 15px #fff,
-            0 0 20px #fff470,
-            0 0 35px #fff470,
-            0 0 40px #fff470,
-            0 0 50px #fff470,
-            0 0 75px #fff470;
-        }
-        to {
-            text-shadow: 0 0 3px #fff,
-            0 0 5px #fff,
-            0 0 8px #fff,
-            0 0 10px #ff9a9f,
-            0 0 18px #ff9a9f,
-            0 0 22px #ff9a9f,
-            0 0 26px #ff9a9f,
-            0 0 33px #ff9a9f;
-        }
     }
 
     @keyframes Glow {
