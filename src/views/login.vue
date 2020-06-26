@@ -7,7 +7,8 @@
         name: "login",
         data() {
             return {
-                time: 3
+                time: 3,
+                gg:false,
             }
         },
         created() {
@@ -19,7 +20,8 @@
                     this.time--
                     if (this.time === 0) {
                         clearInterval(timer)
-                        this.$router.push('/')
+                        // this.$router.push('/')
+
                     }
                 }, 1000)
 

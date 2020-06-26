@@ -1,5 +1,8 @@
 <template>
+
     <div class="scroll" ref="scroll" @scroll="scroll">
+        <div style="position: absolute;top: 20%;left: 20%;z-index: 999" v-if="acc">{{backwards}}</div>
+
         <div style="position: fixed;top:3.7%;right:23.1%;z-index: 999;">
 
             <div class="rotation">{{music ? '关音乐' : '开音乐'}}</div>
@@ -84,6 +87,8 @@
         data() {
 
             return {
+                acc:true,
+                backwards:3,
                 music: true,
                 hint: true,
                 kg: true,
@@ -103,6 +108,7 @@
                 load: true,
                 time: 5,
                 first: true,
+                close:null,
 
                 img: [require('../assets/images/a.png'), require('../assets/images/b.png'),
                     require('../assets/images/c.png')],
@@ -114,7 +120,10 @@
             }
         },
         mounted() {
+            this.$nextTick(() => {
+              this.login();
 
+            });
             this.jump()
             this.autoPlayAudio();
             wxapi.wxRegister(this.wxRegCallback);
@@ -124,7 +133,18 @@
             froth,
         },
         methods: {
-            //微信的方法
+            login(){
+                let timer = setInterval(() => {
+                    this.backwards--
+                    if (this.backwards === 0) {
+                        clearInterval(timer)
+                       this.acc=false;
+
+                    }
+                }, 1000)
+            },
+
+
             wxRegCallback() {
                 // 用于微信JS-SDK回调
                 this.wxShareTimeline()
