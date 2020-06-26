@@ -90,8 +90,6 @@
                 //前进
                 front: null,
                 off: true,
-                x: null,
-                Y: null,
                 startX: null,
                 startY: null,
                 test: 0,
@@ -137,7 +135,7 @@
                 let option = {
                     title: '玉林中鼎~~~？！', // 分享标题, 请自行替换
                     link: window.location.href.split('#')[0], // 分享链接，根据自身项目决定是否需要split
-                    imgUrl: 'logo.png', // 分享图标, 请自行替换，需要绝对路径
+                    imgUrl: '', // 分享图标, 请自行替换，需要绝对路径
                     success: () => {
                         alert('分享成功')
                     },
@@ -593,7 +591,7 @@
         height: 100%;
         color: gold;
         border-color: currentColor transparent transparent currentColor;
-        border-width: 0.2em 0.2em 0em 0em;
+        border-width: 0.2em 0.2em 0 0;
         --deg: -45deg;
         animation-direction: normal;
     }
@@ -603,7 +601,7 @@
         height: 70%;
         color: lime;
         border-color: currentColor currentColor transparent transparent;
-        border-width: 0.2em 0em 0em 0.2em;
+        border-width: 0.2em 0 0 0.2em;
         --deg: -135deg;
         animation-direction: reverse;
     }

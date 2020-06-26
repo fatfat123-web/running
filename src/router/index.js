@@ -18,6 +18,12 @@ const routes = [
     component: () => import('@/views/froth'),
 
   },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login'),
+
+  },
 
 
 
