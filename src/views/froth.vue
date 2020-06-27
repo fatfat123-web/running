@@ -1,7 +1,7 @@
 <template>
 
     <section>
-
+        <slot></slot>
         <!--                <h2>Bubbles</h2>-->
     </section>
 

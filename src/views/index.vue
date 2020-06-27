@@ -1,10 +1,11 @@
 <template>
 
     <div class="scroll" ref="scroll" @scroll="scroll">
-        <div style="position: absolute;top: 20%;left: 20%;z-index: 999" v-if="acc">{{backwards}}</div>
 
+<!--        <div style="position: absolute;top: 20%;left: 20%;z-index: 999;background: aliceblue" v-if="acc">-->
+<!--            {{backwards}}-->
+<!--        </div>-->
         <div style="position: fixed;top:3.7%;right:23.1%;z-index: 999;">
-
             <div class="rotation">{{music ? '关音乐' : '开音乐'}}</div>
             <div class="loader1" @click="pause(true)">
                 <div class="loop">
@@ -14,65 +15,64 @@
                     <div class="ring"></div>
                 </div>
             </div>
-
             <audio ref="music" id="music" src="../assets/music/cn.mp3" loop="loop" preload autoplay="autoplay"></audio>
         </div>
-        <froth class="froth" v-if="first"></froth>
-        <v-touch @swiperight="swiperight">
-
+        <froth class="froth" v-if="one">
+            <img src="../assets/images/bj1.png" @load="loadImg">
+        </froth>
+        <v-touch @swiperight="swiperight" v-if="two">
             <div class="main animate__animated"
                  style="height: 100vh;width: 100%;position: fixed;left: 0;top: 0;z-index: 2;"
                  :style="{background:`url(${img3})`,backgroundSize:'100% 100%'}"
                  :class="animateEnd ? '' : 'animate__fadeOut'" v-show="mainShow">
 
-                <div class="container" v-if="!load" style="left:14%;z-index: 99">
+                <div class="container" style="left:14%;z-index: 99">
                     玉北同城加速融合
                 </div>
-                <div class="container" v-if="!load" style="left:28%;z-index: 99;">
+                <div class="container" style="left:28%;z-index: 99;">
                     大城崛起在即
                 </div>
                 <img src="../assets/images/hand.gif"
                      style=" position: absolute;left: 22%;top: 80%;width: 2.5rem;height: auto">
             </div>
-
-
         </v-touch>
-
-
-        <div class="hint" v-if="hint===true" @click="hint=false">
-            <div class="circle top">
-            </div>
-            <div class="pen" style="  top:11%;left: 27.3%;"></div>
-            <div class="pen" style="  top:80.8%;left: 27.3%;"></div>
-            <img src="../assets/images/hint.gif"  style=" position: absolute;left: 32%;top: 27%;width: 2.5rem;height: auto" >
-            <div class="moveup">
-                <div class="arrow arrow-up">
+        <div v-if="three"  @touchstart.prevent="gtouchstart" @touchend.prevent="triggerReply" >
+            <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;"/>
+            <div class="hint" v-if="tips">
+                <div class="circle top">
                 </div>
+                <div class="pen" style="  top:11%;left: 27.3%;"></div>
+                <div class="pen" style="  bottom:11%;left: 27.3%;"></div>
+                <img src="../assets/images/hint.gif"
+                     style=" position: absolute;left: 32%;top: 27%;width: 2.5rem;height: auto">
+                <div class="moveup">
+                    <div class="arrow arrow-up">
+                    </div>
+                </div>
+                <div class="movedown">
+                    <div class="arrow arrow-down">
+
+                    </div>
+                </div>
+                <div class="circle bottom"></div>
+
             </div>
-            <div class="movedown">
-                <div class="arrow arrow-down">
+            <div class="main" >
+
+                <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;" @load="imgLoadEnd"/>
+                <div style="width:31%;position: fixed;" ref="go" :style="go" v-show="kg===false">
+
+                    <img style="width: 100%;height: auto" :src="item" v-for="(item,index) in img2"
+                         v-show="index === mark">
+
 
                 </div>
-            </div>
-            <div class="circle bottom"></div>
 
-        </div>
-        <div class="main" @touchstart.prevent="gtouchstart" @touchend.prevent="triggerReply">
+                <div style="width:31%;position: fixed;" ref="go" :style="go" v-show="kg===true">
 
-            <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;" @load="imgLoadEnd"/>
-
-            <div style="width:31%;position: fixed;" ref="go" :style="go" v-show="kg===false">
-
-                <img style="width: 100%;height: auto" :src="item" v-for="(item,index) in img2"
-                     v-show="index === mark">
-
-
-            </div>
-
-            <div style="width:31%;position: fixed;" ref="go" :style="go" v-show="kg===true">
-
-                <img style="width: 100%;height: auto" class="element" :src="item" v-for="(item,index) in img"
-                     v-show="index === mark">
+                    <img style="width: 100%;height: auto" class="element" :src="item" v-for="(item,index) in img"
+                         v-show="index === mark">
+                </div>
             </div>
         </div>
     </div>
@@ -87,8 +87,8 @@
         data() {
 
             return {
-                acc:true,
-                backwards:3,
+                acc: true,
+                backwards: 3,
                 music: true,
                 hint: true,
                 kg: true,
@@ -107,8 +107,8 @@
                 animate: true,
                 load: true,
                 time: 5,
-                first: true,
-                close:null,
+                first: false,
+                close: null,
 
                 img: [require('../assets/images/a.png'), require('../assets/images/b.png'),
                     require('../assets/images/c.png')],
@@ -117,28 +117,42 @@
                     require('../assets/images/2.png')],
                 img3: require('../assets/images/bj2.png'),
                 go: {top: '35%', left: '8%'},
+                one: true,
+                two: false,
+                three: false,
+                tips: true,
             }
         },
         mounted() {
-            this.$nextTick(() => {
-              this.login();
-
-            });
-            this.jump()
+            // this.$nextTick(() => {
+            //     this.login();
+            // });
+            // this.jump()
             this.autoPlayAudio();
             wxapi.wxRegister(this.wxRegCallback);
-
+            // this.init();
         },
         components: {
             froth,
         },
         methods: {
-            login(){
+            loadImg() {
+                this.init();
+            },
+            init() {
+                // this.one = true;
+                setTimeout(() => {
+                    this.one = false;
+                    this.two = true;
+                }, 3000)
+            },
+            login() {
                 let timer = setInterval(() => {
                     this.backwards--
                     if (this.backwards === 0) {
+                        this.first = true;
                         clearInterval(timer)
-                       this.acc=false;
+                        this.acc = false;
 
                     }
                 }, 1000)
@@ -246,24 +260,30 @@
                 div.scrollTop += 2
                 this.animate = false
                 setTimeout(() => {
-                    this.animateEnd = false
-                    setTimeout(() => {
-                        this.mainShow = false
-                        this.autoPlayAudio()
-                    }, 400)
+                    this.two = false;
+                    this.three = true;
+                    // this.animateEnd = false
+                    // setTimeout(() => {
+                    //     this.mainShow = false
+                    //     this.autoPlayAudio()
+                    // }, 400)
                 }, 600)
             },
 
-            imgLoadEnd() {
-                setTimeout(() => {
-                    this.$nextTick(() => {
-                        this.load = false
-                    })
-                }, 500)
+            imgLoadEnd(e) {
+                // setTimeout(() => {
+                //     this.$nextTick(() => {
+                //         this.load = false
+                //     })
+                // }, 500)
             },
 
             // 触摸开始
             gtouchstart(e) {
+                if (this.tips) {
+                    this.tips = false;
+                    return;
+                }
                 // 可视窗口的高度
                 let clientHeight = this.$refs.scroll.clientHeight
                 this.startX = e.changedTouches[0].pageX;
@@ -325,8 +345,8 @@
         left: 0;
         top: 0;
         z-index: 4;
-        background: url(../assets/images/bj1.png) no-repeat;
-        background-size: 100% 100%;
+        /*background: url(../assets/images/bj1.png) no-repeat;*/
+        /*background-size: 100% 100%;*/
     }
 
     .scroll {
@@ -342,7 +362,7 @@
 
     .hint {
         z-index: 1;
-        position: absolute;
+        /*position: absolute;*/
         height: 100%;
         width: 100vw;
 
