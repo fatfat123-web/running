@@ -87,17 +87,14 @@
         data() {
 
             return {
-                acc: true,
+                // acc: true,
                 backwards: 3,
                 music: true,
-                hint: true,
                 kg: true,
                 //前进
                 front: null,
-                off: true,
                 startX: null,
                 startY: null,
-                test: 0,
                 timer: null,
                 flagfind: false,
                 mark: 0,
@@ -105,11 +102,6 @@
                 mainShow: true,
                 animateEnd: true,
                 animate: true,
-                load: true,
-                time: 5,
-                first: false,
-                close: null,
-
                 img: [require('../assets/images/a.png'), require('../assets/images/b.png'),
                     require('../assets/images/c.png')],
 
@@ -124,10 +116,7 @@
             }
         },
         mounted() {
-            // this.$nextTick(() => {
-            //     this.login();
-            // });
-            // this.jump()
+
             this.autoPlayAudio();
             wxapi.wxRegister(this.wxRegCallback);
             // this.init();
@@ -140,22 +129,10 @@
                 this.init();
             },
             init() {
-                // this.one = true;
                 setTimeout(() => {
                     this.one = false;
                     this.two = true;
                 }, 3000)
-            },
-            login() {
-                let timer = setInterval(() => {
-                    this.backwards--
-                    if (this.backwards === 0) {
-                        this.first = true;
-                        clearInterval(timer)
-                        this.acc = false;
-
-                    }
-                }, 1000)
             },
 
 
@@ -198,17 +175,7 @@
                 wxapi.ShareAppMessage(option)
             },
 
-            jump() {
-                let timer = setInterval(() => {
-                    this.time--
-                    if (this.time === 0) {
-                        this.first = false;
-                        clearInterval(timer)
-                    }
-                }, 1000)
 
-
-            },
             pause(val) {
 
                 // console.log(this.$refs.music)
@@ -259,23 +226,21 @@
                 let div = this.$refs.scroll
                 div.scrollTop += 2
                 this.animate = false
+                console.log(div.scrollTop)
                 setTimeout(() => {
-                    this.two = false;
-                    this.three = true;
-                    // this.animateEnd = false
-                    // setTimeout(() => {
-                    //     this.mainShow = false
-                    //     this.autoPlayAudio()
-                    // }, 400)
+
+                    this.animateEnd = false
+                    setTimeout(() => {
+                        this.mainShow = false
+                        this.autoPlayAudio();
+                        this.two = false;
+                        this.three = true;
+                    }, 400)
                 }, 600)
             },
 
             imgLoadEnd(e) {
-                // setTimeout(() => {
-                //     this.$nextTick(() => {
-                //         this.load = false
-                //     })
-                // }, 500)
+
             },
 
             // 触摸开始
@@ -303,6 +268,7 @@
             advance() {
                 let div = this.$refs.scroll
                 div.scrollTop += 2
+                console.log(div.scrollTop)
                 let arr = [0, 1, 0, 2]
                 this.mark = arr[parseInt(this.rs) % 4];
                 if (this.flagfind === true) return false;

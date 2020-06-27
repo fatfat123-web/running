@@ -1,33 +1,55 @@
 <template>
-    <p>{{time}}</p>
+    <div class="page-container" style="text-align: center;">
+        <div id="loading-panel">
+            <h1><strong>Loading...</strong></h1>
+            <h2><strong>{{percent}}</strong></h2>
+        </div>
+    </div>
 </template>
 
 <script>
     export default {
-        name: "login",
-        data() {
+        data () {
             return {
-                time: 3,
-                gg:false,
+                count: 0,
+                percent: '',
             }
         },
-        created() {
-            this.jump()
+        mounted: function() {
+            this.preload()
         },
         methods: {
-            jump() {
-                let timer = setInterval(() => {
-                    this.time--
-                    if (this.time === 0) {
-                        clearInterval(timer)
-                        // this.$router.push('/')
+            preload: function() {
+                let imgs = [
+                    "static/img/bj",
+                    "static/img/bj1",
+                    "static/img/bj2",
 
+                ]
+
+                for (let img of imgs) {
+                    let image = new Image()
+                    image.src = img
+                    image.onload = () => {
+                        this.count++
+                        // 计算图片加载的百分数，绑定到percent变量
+                        let percentNum = Math.floor(this.count / 3 * 100)
+                        this.percent = `${percentNum}%`
                     }
-                }, 1000)
-
-
+                }
             },
+
         },
+
+        watch: {
+            count: function(val) {
+                // console.log(val)
+                if (val === 3) {
+                    // 图片加载完成后跳转页面
+                    this.$router.push({path: 'index'})
+                }
+            }
+        }
     }
 </script>
 
