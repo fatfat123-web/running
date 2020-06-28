@@ -30,7 +30,12 @@ const routes = [
     component: () => import('@/views/rain'),
 
   },
+  {
+    path: '/tree',
+    name: 'tree',
+    component: () => import('@/views/tree'),
 
+  },
 
 ]
 
