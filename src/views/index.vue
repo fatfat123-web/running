@@ -62,7 +62,7 @@
             <div class="main">
                 <rain  v-if="this.rs<18"  style="position: absolute;left: 0;top: 0;"></rain>
 
-                <tree style="position: absolute;left:42%;top: 20%;" class="test"> </tree>
+                <tree style="position: absolute;left:-29%;top: 25%;" class="test"> </tree>
 
                 <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;" @load="imgLoadEnd"/>
 
