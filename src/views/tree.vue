@@ -1,5 +1,5 @@
 <template>
-    <canvas id="canvas"></canvas>
+    <canvas id="canvas" ></canvas>
 </template>
 
 <script>
@@ -13,8 +13,9 @@
 
         },
         mounted() {
+
             const canv = document.getElementById('canvas');
-            const ctx = canvas.getContext('2d');
+            const ctx = canv.getContext('2d');
             canv.width = document.body.clientWidth;
             canv.height = document.body.clientHeight;
             const colors = [{

@@ -61,6 +61,9 @@
 
             <div class="main">
                 <rain  v-if="this.rs<18"  style="position: absolute;left: 0;top: 0;"></rain>
+
+                <tree style="position: absolute;left: 0;top: 20%;z-index: 999"> </tree>
+
                 <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;" @load="imgLoadEnd"/>
 
 
@@ -83,6 +86,7 @@
 <script>
     import froth from './froth'
     import rain from './rain'
+    import tree from './tree'
     import wxapi from '../../common/wxapi.js'
 
     export default {
@@ -127,6 +131,7 @@
         components: {
             froth,
             rain,
+            tree,
         },
         methods: {
             loadImg() {
