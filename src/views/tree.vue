@@ -1,5 +1,5 @@
 <template>
-    <canvas id="canvas" ></canvas>
+    <canvas id="canvas2" ></canvas>
 </template>
 
 <script>
@@ -7,17 +7,20 @@
         name: "tree",
         data(){
           return{
-
+              wd:null,
+              hg:null,
 
           }
 
         },
         mounted() {
 
-            const canv = document.getElementById('canvas');
+            const canv = document.getElementById('canvas2');
             const ctx = canv.getContext('2d');
-            canv.width = document.body.clientWidth;
-            canv.height = document.body.clientHeight;
+             this.wd=document.body.clientHeight;
+              this.hg=document.body.clientWidth
+            canv.width = this.wd;
+            canv.height = this.hg;
             const colors = [{
                 hue: 0,
                 sat: 100,
