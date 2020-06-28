@@ -2,9 +2,9 @@
 
     <div class="scroll" ref="scroll" @scroll="scroll">
 
-<!--        <div style="position: absolute;top: 20%;left: 20%;z-index: 999;background: aliceblue" v-if="acc">-->
-<!--            {{backwards}}-->
-<!--        </div>-->
+        <!--        <div style="position: absolute;top: 20%;left: 20%;z-index: 999;background: aliceblue" v-if="acc">-->
+        <!--            {{backwards}}-->
+        <!--        </div>-->
         <div style="position: fixed;top:3.7%;right:23.1%;z-index: 999;">
             <div class="rotation">{{music ? '关音乐' : '开音乐'}}</div>
             <div class="loader1" @click="pause(true)">
@@ -36,8 +36,9 @@
                      style=" position: absolute;left: 22%;top: 80%;width: 2.5rem;height: auto">
             </div>
         </v-touch>
-        <div v-if="three"  @touchstart.prevent="gtouchstart" @touchend.prevent="triggerReply" >
-            <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;"/>
+        <div v-if="three" @touchstart.prevent="gtouchstart" @touchend.prevent="triggerReply">
+            <!--            <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;"/>-->
+
             <div class="hint" v-if="tips">
                 <div class="circle top">
                 </div>
@@ -57,19 +58,20 @@
                 <div class="circle bottom"></div>
 
             </div>
-            <div class="main" >
 
+            <div class="main">
+                <rain  v-if="this.rs<18"  style="position: absolute;left: 0;top: 0;"></rain>
                 <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;" @load="imgLoadEnd"/>
+
+
                 <div style="width:31%;position: fixed;" ref="go" :style="go" v-show="kg===false">
 
                     <img style="width: 100%;height: auto" :src="item" v-for="(item,index) in img2"
                          v-show="index === mark">
 
-
                 </div>
 
                 <div style="width:31%;position: fixed;" ref="go" :style="go" v-show="kg===true">
-
                     <img style="width: 100%;height: auto" class="element" :src="item" v-for="(item,index) in img"
                          v-show="index === mark">
                 </div>
@@ -80,6 +82,7 @@
 
 <script>
     import froth from './froth'
+    import rain from './rain'
     import wxapi from '../../common/wxapi.js'
 
     export default {
@@ -123,6 +126,7 @@
         },
         components: {
             froth,
+            rain,
         },
         methods: {
             loadImg() {
@@ -219,14 +223,11 @@
                 let Height = scrollHeight - clientHeight
                 //滚动条滚动距离 百分比
                 let scrolldrag = scrollTop / Height
-                this.rs = (scrolldrag * 200).toFixed(2) * 1
+                this.rs = (scrolldrag * 100).toFixed(2) * 1
             },
 
             swiperight() {
-                let div = this.$refs.scroll
-                div.scrollTop += 2
                 this.animate = false
-                console.log(div.scrollTop)
                 setTimeout(() => {
 
                     this.animateEnd = false
@@ -246,6 +247,7 @@
             // 触摸开始
             gtouchstart(e) {
                 if (this.tips) {
+                    this.$refs.scroll.scrollTop += 2
                     this.tips = false;
                     return;
                 }
@@ -267,8 +269,8 @@
             //   前进
             advance() {
                 let div = this.$refs.scroll
-                div.scrollTop += 2
-                console.log(div.scrollTop)
+                div.scrollTop += 4
+                console.log(this.rs)
                 let arr = [0, 1, 0, 2]
                 this.mark = arr[parseInt(this.rs) % 4];
                 if (this.flagfind === true) return false;
@@ -279,7 +281,7 @@
                 let arr = [0, 1, 0, 2]
                 this.mark = arr[parseInt(this.rs) % 4];
                 let div = this.$refs.scroll
-                div.scrollTop -= 2
+                div.scrollTop -= 4
                 if (this.flagfind === true)
                     return false;
                 window.requestAnimationFrame(this.retreat)
@@ -328,7 +330,7 @@
 
     .hint {
         z-index: 1;
-        /*position: absolute;*/
+        position: absolute;
         height: 100%;
         width: 100vw;
 

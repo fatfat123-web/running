@@ -24,7 +24,12 @@ const routes = [
     component: () => import('@/views/login'),
 
   },
+  {
+    path: '/rain',
+    name: 'rain',
+    component: () => import('@/views/rain'),
 
+  },
 
 
 ]
