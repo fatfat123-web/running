@@ -5,12 +5,12 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'index',
-    component: () => import('@/views/index'),
-
-  },
+  // {
+  //   path: '/',
+  //   name: 'index',
+  //   component: () => import('@/views/index'),
+  //
+  // },
 
   {
     path: '/froth',
@@ -36,6 +36,24 @@ const routes = [
     component: () => import('@/views/tree'),
 
   },
+  {
+    path: '/',
+    component: () => import('@/views/new/main'),
+    children: [
+      {
+        path: '/one',
+        component: () => import('@/views/new/one')
+      },
+      {
+        path: '/two',
+        component: () => import('@/views/new/two')
+      },
+      {
+        path: '/three',
+        component: () => import('@/views/new/three')
+      }
+    ]
+  }
 
 ]
 
