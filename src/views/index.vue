@@ -524,7 +524,7 @@
             transform: rotate(90deg);
         }
     }
-
+    /*玉北同城加速融合*/
     .container {
         font-weight: 400;
         letter-spacing: 3px;
@@ -682,6 +682,7 @@
         height: 5em;
 
     }
+    /*树的组件*/
     .test{
         transform: rotate(90deg);
         -ms-transform: rotate(90deg);
