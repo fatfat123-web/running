@@ -1,6 +1,6 @@
 <template>
     <!-- 滚动条事件 -->
-    <div class="scroll" ref="scroll" @scroll.native="scroll">
+    <div class="scroll" ref="scroll" @scroll="scroll">
         <!-- 触摸事件-->
         <div @touchstart.prevent="gtouchstart" @touchend.prevent="triggerReply">
             <!-- 提示的图-->
