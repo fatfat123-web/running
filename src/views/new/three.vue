@@ -1,6 +1,6 @@
 <template>
     <!-- 滚动条事件 -->
-    <div class="scroll" ref="scroll" @scroll.native="scroll">
+    <div class="scroll" ref="scroll" @scroll="scroll">
         <!-- 触摸事件-->
         <div @touchstart.prevent="gtouchstart" @touchend.prevent="triggerReply">
             <!-- 提示的图-->
@@ -159,6 +159,8 @@
     }
 
     .scroll {
+        width: 100%;
+        height: 100vh;
         margin: 0 auto;
         overflow-y: auto;
         overflow-x: hidden;
@@ -167,7 +169,7 @@
     }
 
     .main {
-        position: absolute;
+        position: relative;
     }
 
 
