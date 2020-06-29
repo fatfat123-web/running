@@ -1,4 +1,5 @@
 <template>
+    <div class="bj">
     <v-touch @swiperight="swiperight" >
         <div class="main animate__animated"
              style="height: 100vh;width: 100%;position: fixed;left: 0;top: 0;z-index: 2;"
@@ -14,6 +15,7 @@
                  style=" position: absolute;left: 22%;top: 80%;width: 2.5rem;height: auto">
         </div>
     </v-touch>
+    </div>
 </template>
 
 <script>
@@ -30,12 +32,17 @@
             // setTimeout(() => {
             //     this.$router.push('three')
             // }, 3000)
+            // console.log(document.getElementById('music'))
         },
         methods:{
             swiperight() {
                 this.animate = false
                 setTimeout(() => {
+                let aa=   document.getElementById('music')
+                    aa.play();
+                    console.log(aa)
 
+                    // this.$refs.music.play();
                     this.animateEnd = false
                     setTimeout(() => {
                         this.$router.push('three')
@@ -54,7 +61,14 @@
         background: url("../../assets/images/bj2.png") no-repeat;
         background-size: 100% 100%;
     }
-
+    .bj{
+        width: 100%;
+        height: 100vh;
+        margin: 0 auto;
+        position: relative;
+        background: url(../../assets/images/bj.jpg) no-repeat bottom;
+        background-size: 100%;
+    }
     /*.container {*/
     /*    background: url("../../assets/images/bj2.png") no-repeat;*/
     /*    background-size: 100%;*/

@@ -52,7 +52,7 @@
                     if (this.$refs.music.paused) {
                         this.$refs.music.play();// 这个就是播放
                         this.music = true
-                        console.log(this.music)
+                        // console.log(this.music)
 
                     } else {
                         if (val) {
