@@ -1,23 +1,27 @@
 <template>
-    <canvas id="canvas" ></canvas>
+    <canvas id="canvas2"></canvas>
 </template>
 
 <script>
     export default {
         name: "tree",
-        data(){
-          return{
+        data() {
+            return {
+                wd: null,
+                hg: null,
 
-
-          }
+            }
 
         },
         mounted() {
 
-            const canv = document.getElementById('canvas');
+            const canv = document.getElementById('canvas2');
             const ctx = canv.getContext('2d');
-            canv.width = document.body.clientWidth;
-            canv.height = document.body.clientHeight;
+            this.wd = document.body.clientHeight;
+            this.hg = document.body.clientWidth
+            // canv.width = 400;
+            // canv.height = 1800;
+            console.log(canv.width,canv.height)
             const colors = [{
                 hue: 0,
                 sat: 100,
@@ -43,14 +47,14 @@
                 ctx.save();
 
                 ctx.translate(startX, startY * 0.99);
-                ctx.rotate(angle * Math.PI/180);
+                ctx.rotate(angle * Math.PI / 180);
                 ctx.moveTo(0, 0);
                 ctx.lineTo(0, -len);
                 ctx.lineWidth = Math.ceil(len * 0.025);
-                ctx.strokeStyle  = `hsl(15, 36%, ${50 - len * 0.15}%)`;
+                ctx.strokeStyle = `hsl(15, 36%, ${50 - len * 0.15}%)`;
                 ctx.stroke();
 
-                if(len < 10) {
+                if (len < 10) {
                     drawLeaves(startX, startY, 1.4);
                     ctx.restore();
                     return;
@@ -79,11 +83,11 @@
             }
 
             const resizeChecks = event => {
-                canv.width = window.innerWidth;
-                canv.height = window.innerHeight;
+                canv.width = this.wd;
+                canv.height = this.hg;
                 const treeCount = Math.floor(canv.width / 150);
                 // Time
-                for(let i = 0; i < treeCount; i++) {
+                for (let i = 0; i < treeCount; i++) {
                     // Memory
                     drawTrees(Math.random() * (canv.width - 100) + 100, canv.height * 1.3, Math.floor(canv.height * 0.3), 0);
                 }

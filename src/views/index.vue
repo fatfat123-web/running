@@ -62,7 +62,7 @@
             <div class="main">
                 <rain  v-if="this.rs<18"  style="position: absolute;left: 0;top: 0;"></rain>
 
-                <tree style="position: absolute;left: 0;top: 20%;z-index: 999"> </tree>
+                <tree style="position: absolute;left:-29%;top: 25%;" class="test"> </tree>
 
                 <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;" @load="imgLoadEnd"/>
 
@@ -680,6 +680,15 @@
         position: fixed;
         width: 5em;
         height: 5em;
+
+    }
+    .test{
+        transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
 
     }
 </style>
