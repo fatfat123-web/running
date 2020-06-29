@@ -60,24 +60,23 @@
             </div>
 
             <div class="main">
-                <rain  v-if="this.rs<18"  style="position: absolute;left: 0;top: 0;"></rain>
+                <rain v-if="this.rs<18" style="position: absolute;left: 0;top: 0;"></rain>
 
-                <tree style="position: absolute;left:-29%;top: 25%;" class="test"> </tree>
+                <tree style="position: absolute;left:-29%;top: 25%;" class="test"></tree>
 
                 <img src="../assets/images/bj.jpg" style="width: 100%;height: auto;" @load="imgLoadEnd"/>
 
-
+                <!--     前进    -->
                 <div style="width:31%;position: fixed;" ref="go" :style="go" v-show="kg===false">
-
                     <img style="width: 100%;height: auto" :src="item" v-for="(item,index) in img2"
                          v-show="index === mark">
-
                 </div>
-
+                <!--     后退   -->
                 <div style="width:31%;position: fixed;" ref="go" :style="go" v-show="kg===true">
                     <img style="width: 100%;height: auto" class="element" :src="item" v-for="(item,index) in img"
                          v-show="index === mark">
                 </div>
+
             </div>
         </div>
     </div>
@@ -94,8 +93,6 @@
         data() {
 
             return {
-                // acc: true,
-                backwards: 3,
                 music: true,
                 kg: true,
                 //前进
@@ -524,6 +521,7 @@
             transform: rotate(90deg);
         }
     }
+
     /*玉北同城加速融合*/
     .container {
         font-weight: 400;
@@ -682,8 +680,9 @@
         height: 5em;
 
     }
+
     /*树的组件*/
-    .test{
+    .test {
         transform: rotate(90deg);
         -ms-transform: rotate(90deg);
         -moz-transform: rotate(90deg);

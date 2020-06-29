@@ -52,7 +52,7 @@
     .main {
         position: relative;
         background: url("../../assets/images/bj2.png") no-repeat;
-        background-size: 100%;
+        background-size: 100% 100%;
     }
 
     /*.container {*/

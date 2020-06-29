@@ -1,25 +1,86 @@
 <template>
-    <div class="scroll" ref="scroll" @scroll="scroll">
-        <div style="position: relative">
-        <img src="../../assets/images/bj.jpg" style="width: 100%;height: auto;" />
+    <!-- 滚动条事件 -->
+    <div class="scroll" ref="scroll" @scroll.native="scroll">
+        <!-- 触摸事件-->
+        <div @touchstart.prevent="gtouchstart" @touchend.prevent="triggerReply">
+            <!-- 提示的图-->
+            <div class="hint" v-if="tips">
+                <div class="circle top">
+                </div>
+                <div class="pen" style="  top:11%;left: 27.3%;"></div>
+                <div class="pen" style="  bottom:11%;left: 27.3%;"></div>
+                <img src="../../assets/images/hint.gif"
+                     style=" position: absolute;left: 32%;top: 27%;width: 2.5rem;height: auto">
+                <div class="moveup">
+                    <div class="arrow arrow-up">
+                    </div>
+                </div>
+                <div class="movedown">
+                    <div class="arrow arrow-down">
+
+                    </div>
+                </div>
+                <div class="circle bottom"></div>
+
+            </div>
+
+            <div class="main">
+                <rain v-if="this.rs<18" style="position: absolute;left: 0;top: 0;"></rain>
+                <!-- 背景图-->
+                <img src="../../assets/images/bj.jpg" style="width: 100%;height: auto;"/>
+                <!--     前进    -->
+                <div style="width:31%;position: fixed;" ref="go" :style="go" v-show="kg===false">
+                    <img style="width: 100%;height: auto" :src="item" v-for="(item,index) in img2"
+                         v-show="index === mark">
+                </div>
+                <!--     后退   -->
+                <div style="width:31%;position: fixed;" ref="go" :style="go" v-show="kg===true">
+                    <img style="width: 100%;height: auto" class="element" :src="item" v-for="(item,index) in img"
+                         v-show="index === mark">
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+    import rain from '@/views/rain'
+
     export default {
         name: "three",
-        data(){
-            return{
-                animateEnd: true,
-                animate: true,
+        data() {
+            return {
+                tips: true,
+                img: [require('../../assets/images/a.png'), require('../../assets/images/b.png'),
+                    require('../../assets/images/c.png')],
+
+                img2: [require('../../assets/images/0.png'), require('../../assets/images/1.png'),
+                    require('../../assets/images/2.png')],
+                go: {top: '35%', left: '8%'},
+
+                kg: true,
+                //前进
+                front: null,
+                startX: null,
+                startY: null,
+                timer: null,
+                flagfind: false,
+                mark: 0,
+                rs: null,
             }
 
         },
+        components: {
+            rain,
+        },
+        created() {
+            // window.addEventListener('scroll', this.scroll);
+        },
         mounted() {
         },
-        methods:{
+        methods: {
             scroll(e) {
+                console.log(111)
                 //滚动条拖动的长度
                 const scrollTop = e.target.scrollTop
                 //网页正文全文高，包括有滚动条时的未见区域
@@ -32,19 +93,200 @@
                 let scrolldrag = scrollTop / Height
                 this.rs = (scrolldrag * 100).toFixed(2) * 1
             },
+            gtouchstart(e) {
+                if (this.tips) {
+                    this.$refs.scroll.scrollTop += 2
+                    this.tips = false;
+                    return;
+                }
+                // 可视窗口的高度
+                let clientHeight = this.$refs.scroll.clientHeight
+                this.startX = e.changedTouches[0].pageX;
+                this.startY = e.changedTouches[0].pageY;
+                this.front = (clientHeight) * (0.4);
+                if (this.startY < this.front) {
+                    this.kg = false;
+                    this.flagfind = false
+                    this.retreat()
+                } else {
+                    this.kg = true;
+                    this.flagfind = false
+                    this.advance()
+                }
+            },
+            //   前进
+            advance() {
+                let div = this.$refs.scroll
+                div.scrollTop += 4
+                console.log(this.rs)
+                let arr = [0, 1, 0, 2]
+                this.mark = arr[parseInt(this.rs) % 4];
+                if (this.flagfind === true) return false;
+                window.requestAnimationFrame(this.advance)
+            },
+            // 后退
+            retreat() {
+                let arr = [0, 1, 0, 2]
+                this.mark = arr[parseInt(this.rs) % 4];
+                let div = this.$refs.scroll
+                div.scrollTop -= 4
+                if (this.flagfind === true)
+                    return false;
+                window.requestAnimationFrame(this.retreat)
+            },
+            // 触摸结束
+            triggerReply() {
+                this.flagfind = true;
+                this.timer = setInterval(() => {
+                    this.mark = 0;
+                }, 100)
+            },
         }
     }
 </script>
 
-<style scoped  lang="scss">
+<style scoped lang="scss">
     img {
         pointer-events: none; /* 禁止长按图片保存 */
     }
+
+    .hint {
+        z-index: 1;
+        position: absolute;
+        height: 100%;
+        width: 100vw;
+
+    }
+
     .scroll {
         margin: 0 auto;
         overflow-y: auto;
         overflow-x: hidden;
         background: url(../../assets/images/bj.jpg) no-repeat bottom;
         background-size: 100%;
+    }
+
+    .main {
+        position: absolute;
+    }
+
+
+    .circle {
+        position: absolute;
+        margin-right: 5px;
+        border-radius: 50%;
+        width: 1.5rem;
+        height: 1.5rem;
+        opacity: 0.3;
+        box-shadow: 5px 5px 20px 10px rgba(255, 255, 0, 1);
+    }
+
+    .pen {
+
+        position: absolute;
+        border-radius: 50%;
+        width: 1.1rem;
+        height: 1.1rem;
+        border: 0.05rem #ffe793 solid;
+        opacity: 0.3;
+
+    }
+
+    .top {
+        left: 25%;
+        top: 10%;
+    }
+
+    .bottom {
+        left: 25%;
+        bottom: 10%;
+    }
+
+    .moveup {
+        position: absolute;
+        top: 25%;
+        left: 29%;
+        animation: moveup 3s linear infinite;
+    }
+
+    .movedown {
+        position: absolute;
+        top: 65%;
+        left: 29%;
+        animation: movedown 3s linear infinite;
+    }
+
+    @keyframes moveup {
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(-20px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+
+    }
+
+    @keyframes movedown {
+        0% {
+            transform: translateY(0px);
+        }
+        50% {
+            transform: translateY(20px);
+        }
+        100% {
+            transform: translateY(0px);
+        }
+
+    }
+
+    .arrow {
+        width: 40px;
+        height: 40px;
+        position: relative;
+        display: inline-block;
+    }
+
+    .arrow:before,
+    .arrow:after {
+        content: '';
+        border-color: transparent;
+        border-style: solid;
+        position: absolute;
+    }
+
+
+    .arrow-up:before {
+        border: none;
+        background-color: #555;
+        height: 50%;
+        width: 30%;
+        top: 50%;
+        left: 35%;
+    }
+
+    .arrow-up:after {
+        left: 0;
+        top: -50%;
+        border-width: 20px 20px;
+        border-bottom-color: #555;
+    }
+
+    .arrow-down:before {
+        border: none;
+        background-color: #555;
+        height: 50%;
+        width: 30%;
+        top: 0;
+        left: 35%;
+    }
+
+    .arrow-down:after {
+        left: 0;
+        top: 50%;
+        border-width: 20px 20px;
+        border-top-color: #555;
     }
 </style>
