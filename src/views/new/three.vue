@@ -25,7 +25,10 @@
             </div>
 
             <div class="main">
+                <!-- 下雨-->
                 <rain v-if="this.rs<18" style="position: absolute;left: 0;top: 0;"></rain>
+                <!--  树-->
+                <tree style="position: absolute;left:-50%;top: 25%;" class="test"></tree>
                 <!-- 背景图-->
                 <img src="../../assets/images/bj.jpg" style="width: 100%;height: auto;"/>
                 <!--     前进    -->
@@ -45,6 +48,7 @@
 
 <script>
     import rain from '@/views/rain'
+    import tree from '@/views/tree'
 
     export default {
         name: "three",
@@ -72,6 +76,7 @@
         },
         components: {
             rain,
+            tree,
         },
         created() {
             // window.addEventListener('scroll', this.scroll);
@@ -80,7 +85,7 @@
         },
         methods: {
             scroll(e) {
-                console.log(111)
+                // console.log(111)
                 //滚动条拖动的长度
                 const scrollTop = e.target.scrollTop
                 //网页正文全文高，包括有滚动条时的未见区域
@@ -118,7 +123,7 @@
             advance() {
                 let div = this.$refs.scroll
                 div.scrollTop += 4
-                console.log(this.rs)
+                // console.log(this.rs)
                 let arr = [0, 1, 0, 2]
                 this.mark = arr[parseInt(this.rs) % 4];
                 if (this.flagfind === true) return false;
@@ -290,5 +295,15 @@
         top: 50%;
         border-width: 20px 20px;
         border-top-color: #555;
+    }
+    /*树的组件*/
+    .test {
+        transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+
     }
 </style>
