@@ -21,7 +21,7 @@
             this.hg = document.body.clientWidth
             // canv.width = 400;
             // canv.height = 1800;
-            console.log(canv.width,canv.height)
+            // console.log(canv.width,canv.height)
             const colors = [{
                 hue: 0,
                 sat: 100,

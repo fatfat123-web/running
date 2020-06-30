@@ -35,6 +35,19 @@
             // console.log(document.getElementById('music'))
         },
         methods:{
+            // autoPlayAudio() {
+            //     //把this的指向给存了起来，使得try里面的pause调用上面的pause方法
+            //     const _this = this
+            //     try {
+            //         WeixinJSBridge.invoke('WeixinJSBridgeReady', {}, function (e) {
+            //
+            //         });
+            //     } catch (e) {
+            //
+            //     }
+            // },
+
+
             swiperight() {
                 this.animate = false
                 setTimeout(() => {

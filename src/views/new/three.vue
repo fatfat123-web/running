@@ -82,6 +82,7 @@
             // window.addEventListener('scroll', this.scroll);
         },
         mounted() {
+
         },
         methods: {
             scroll(e) {
