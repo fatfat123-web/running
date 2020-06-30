@@ -38,23 +38,20 @@
         },
         methods:{
             autoPlayAudio() {
-                console.log(111111111)
                 // const _this = this
                 try {
                     WeixinJSBridge.invoke('WeixinJSBridgeReady', {}, function (e) {
                         let aa=   document.getElementById('music')
                         aa.play();
-                        this.$isPlay = false;
+                        this.$EventBus.$emit('isPlay', true)
                         // msg= true
-                        console.log(msg)
 
                     });
                 } catch (e) {
                     let aa=   document.getElementById('music')
                     aa.play();
                     msg= true
-                    this.$isPlay = true;
-                    console.log(msg)
+                    this.$EventBus.$emit('isPlay', true)
                 }
             },
 

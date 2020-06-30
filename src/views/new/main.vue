@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div style="position: fixed;top:3.7%;right:23.1%;z-index: 999;">
-            <div class="rotation">{{$isPlay ? '关音乐' : '开音乐'}}</div>
+            <div class="rotation">{{isPlay ? '关音乐' : '开音乐'}}</div>
             <div class="loader1" @click="pause(true)">
                 <div class="loop">
                     <div class="ring"></div>
@@ -26,7 +26,8 @@
                     require('../../assets/images/bj.jpg'),
                     require('../../assets/images/bj1.png'),
                     require('../../assets/images/bj2.png'),
-                ]
+                ],
+                isPlay: false,
             }
         },
         created() {
@@ -40,10 +41,23 @@
                 }
             }
         },
+        // computed: {
+        //     isPlay() {
+        //         return this.$isPlay
+        //     }
+        // },
+        watch: {
+            isPlay(val) {
+                console.log(val)
+            }
+        },
         mounted() {
-
+            this.$EventBus.$on('isPlay', data => {
+                this.isPlay = data;
+            })
             // this.autoPlayAudio();
             wxapi.wxRegister(this.wxRegCallback);
+
         },
         methods:{
             wxRegCallback() {
@@ -92,15 +106,13 @@
                     // console.log(this.$refs.music.paused);
                     if (this.$refs.music.paused) {
                         this.$refs.music.play();// 这个就是播放
-                        msg= true
-                        console.log(msg)
+                        this.isPlay= true
                         // console.log(this.music)
 
                     } else {
                         if (val) {
                             this.$refs.music.pause();// 这个就是暂停
-                            msg = false
-                            console.log(msg)
+                            this.isPlay = false
                             // console.log(this.music)
                         }
                     }
