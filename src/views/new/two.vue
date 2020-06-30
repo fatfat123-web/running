@@ -44,7 +44,8 @@
                     WeixinJSBridge.invoke('WeixinJSBridgeReady', {}, function (e) {
                         let aa=   document.getElementById('music')
                         aa.play();
-                        msg= true
+                        this.$isPlay = false;
+                        // msg= true
                         console.log(msg)
 
                     });
@@ -52,6 +53,7 @@
                     let aa=   document.getElementById('music')
                     aa.play();
                     msg= true
+                    this.$isPlay = true;
                     console.log(msg)
                 }
             },

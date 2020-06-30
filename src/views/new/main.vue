@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div style="position: fixed;top:3.7%;right:23.1%;z-index: 999;">
-            <div class="rotation">{{msg ? '关音乐' : '开音乐'}}</div>
+            <div class="rotation">{{$isPlay ? '关音乐' : '开音乐'}}</div>
             <div class="loader1" @click="pause(true)">
                 <div class="loop">
                     <div class="ring"></div>

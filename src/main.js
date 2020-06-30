@@ -10,6 +10,8 @@ var VueTouch = require('vue-touch')
 Vue.use(VueTouch, {name: 'v-touch'})
 Vue.config.productionTip = false
 
+Vue.prototype.$isPlay = false; // 是否播放音乐
+
 new Vue({
   click,
   router,
