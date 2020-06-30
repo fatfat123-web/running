@@ -26,9 +26,10 @@
 
             <div class="main">
                 <!-- 下雨-->
-                <rain v-if="this.rs<18" style="position: absolute;left: 0;top: 0;"></rain>
-                <!--  树-->
-                <tree style="position: absolute;left:-50%;top: 25%;" class="test"></tree>
+                <rain v-if="this.rs<18" style="position: absolute;left: 0;top: 0;height:20%;"></rain>
+<!--                                                  下雪啦-->
+                <snow style="position: absolute;top: 20%;height:20%;width: auto" ></snow>
+
                 <!-- 背景图-->
                 <img src="../../assets/images/bj.jpg" style="width: 100%;height: auto;"/>
                 <!--     前进    -->
@@ -41,6 +42,10 @@
                     <img style="width: 100%;height: auto" class="element" :src="item" v-for="(item,index) in img"
                          v-show="index === mark">
                 </div>
+<!--&lt;!&ndash;                  树&ndash;&gt;-->
+<!--                <tree style="position: absolute;left:-35%;top: 20%;height:12%;width: auto" class="test"></tree>-->
+
+
             </div>
         </div>
     </div>
@@ -49,6 +54,7 @@
 <script>
     import rain from '@/views/rain'
     import tree from '@/views/tree'
+    import snow from '@/views/snow'
 
     export default {
         name: "three",
@@ -77,6 +83,7 @@
         components: {
             rain,
             tree,
+            snow,
         },
         created() {
             // window.addEventListener('scroll', this.scroll);

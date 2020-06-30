@@ -37,6 +37,11 @@ const routes = [
 
   },
   {
+    path: '/snow',
+    name: 'snow',
+    component: () => import('@/views/snow'),
+  },
+  {
     path: '/',
     component: () => import('@/views/new/main'),
     children: [

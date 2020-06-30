@@ -1,5 +1,5 @@
 <template>
-    <canvas id="canvas2"></canvas>
+    <canvas id="canvas3"></canvas>
 </template>
 
 <script>
@@ -9,13 +9,8 @@
             return {
                 wd: null,
                 hg: null,
-
             }
-
-        },
-        mounted() {
-
-            const canv = document.getElementById('canvas2');
+            const canv = document.getElementById('canvas3');
             const ctx = canv.getContext('2d');
             this.wd = document.body.clientHeight;
             this.hg = document.body.clientWidth
@@ -45,8 +40,9 @@
 
                 ctx.beginPath();
                 ctx.save();
-
+                //绘制图像的位置
                 ctx.translate(startX, startY * 0.99);
+                //旋转
                 ctx.rotate(angle * Math.PI / 180);
                 ctx.moveTo(0, 0);
                 ctx.lineTo(0, -len);
@@ -73,11 +69,16 @@
                 ctx.beginPath();
                 ctx.save();
                 ctx.arc(posX, posY, size, 0, 2 * Math.PI);
-                ctx.fillStyle = `hsla(${colors[leafColor].hue}, ${colors[leafColor].sat}%, ${colors[leafColor].light}%, 50%)`;
-                ctx.shadowColor = `hsla(${colors[leafColor].hue}, ${colors[leafColor].sat}%, ${colors[leafColor].light - 20}%, 50%)`;
+                //填充颜色的百分比
+                ctx.fillStyle = `hsla(${colors[leafColor].hue}, ${colors[leafColor].sat}%, ${colors[leafColor].light}%, 100%)`;
+                //阴影颜色的百分比
+                ctx.shadowColor = `hsla(${colors[leafColor].hue}, ${colors[leafColor].sat}%, ${colors[leafColor].light - 20}%, 100%)`;
+                //阴影横向距离
                 ctx.shadowOffsetX = 1;
+                //阴影的纵向位移量
                 ctx.shadowOffsetY = 1;
-                ctx.shadowBlur = 1;
+                //阴影模糊
+                ctx.shadowBlur = 0.5;
                 ctx.fill();
                 ctx.restore();
             }
@@ -95,6 +96,11 @@
 
             resizeChecks();
             window.addEventListener('resize', resizeChecks);
+
+        },
+        mounted() {
+
+
         }
     }
 </script>

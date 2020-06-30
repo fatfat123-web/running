@@ -1,5 +1,5 @@
 <template>
-    <canvas id="canvas" ></canvas>
+    <canvas id="canvas2" ></canvas>
 </template>
 
 <script>
@@ -18,10 +18,10 @@
         },
         mounted() {
             (function(){
-                var canvas = document.getElementById('canvas');
+                var canvas = document.getElementById('canvas2');
                 var ctx = canvas.getContext('2d');
-                document.getElementById("canvas").width =  document.body.clientWidth;
-                document.getElementById("canvas").height = document.body.clientHeight;
+                document.getElementById("canvas2").width =  document.body.clientWidth;
+                document.getElementById("canvas2").height = document.body.clientHeight;
                 var w = document.documentElement.offsetWidth;
                 var h = document.documentElement.offsetHeight;
                 var x = 0, y = 0,len = -50,angle = -170,count = 50;
