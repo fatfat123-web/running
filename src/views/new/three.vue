@@ -25,25 +25,33 @@
             </div>
 
             <div class="main">
+
+                <pig style="position: absolute;top: 20%;height:20%;width: auto" class="test"></pig>
+
                 <!-- 下雨-->
-                <rain v-if="this.rs<18" style="position: absolute;left: 0;top: 0;height:20%;"></rain>
-<!--                                                  下雪啦-->
-                <snow style="position: absolute;top: 20%;height:20%;width: auto" ></snow>
+
+                <rain v-if="this.rs<18" style="position: absolute;right:15%;top: 0;height:20%;"></rain>
+                <!-- 下雪啦-->
+                <snow style="position: absolute;top: 20%;height:20%;width: auto"></snow>
+
 
                 <!-- 背景图-->
                 <img src="../../assets/images/bj.jpg" style="width: 100%;height: auto;"/>
-                <!--     前进    -->
+                <!--    前进    -->
                 <div style="width:31%;position: fixed;" ref="go" :style="go" v-show="kg===false">
                     <img style="width: 100%;height: auto" :src="item" v-for="(item,index) in img2"
                          v-show="index === mark">
                 </div>
-                <!--     后退   -->
+                <!--    后退   -->
                 <div style="width:31%;position: fixed;" ref="go" :style="go" v-show="kg===true">
                     <img style="width: 100%;height: auto" class="element" :src="item" v-for="(item,index) in img"
                          v-show="index === mark">
                 </div>
-<!--&lt;!&ndash;                  树&ndash;&gt;-->
-<!--                <tree style="position: absolute;left:-35%;top: 20%;height:12%;width: auto" class="test"></tree>-->
+                <!--                云-->
+                <img src="../../assets/images/cloud.png" style="height: auto;width:35%;position: absolute;right: 5%;top: 0%;"/>
+                <img src="../../assets/images/cloud.png" class="cloud" style="height: auto;width:25%;position: absolute;right: 2%;top: 5%;"/>
+                <img src="../../assets/images/cloud.png"  style="height: auto;width:22%;position: absolute;right: 9%;top: 11%;"/>
+                <!--    <tree style="position: absolute;left:-35%;top: 20%;height:12%;width: auto" class="test"></tree>-->
 
 
             </div>
@@ -55,6 +63,7 @@
     import rain from '@/views/rain'
     import tree from '@/views/tree'
     import snow from '@/views/snow'
+    import pig from '@/views/pig'
 
     export default {
         name: "three",
@@ -84,6 +93,7 @@
             rain,
             tree,
             snow,
+            pig,
         },
         created() {
             // window.addEventListener('scroll', this.scroll);
@@ -304,6 +314,7 @@
         border-width: 20px 20px;
         border-top-color: #555;
     }
+
     /*树的组件*/
     .test {
         transform: rotate(90deg);
@@ -312,6 +323,49 @@
         -webkit-transform: rotate(90deg);
         -o-transform: rotate(90deg);
         filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+        animation: left 4s ease infinite;
+        /*过度*/
+        transition: all 1s ease;
 
+    }
+
+    @keyframes left {
+        0% {
+            left: 0;
+        }
+        25% {
+            left: -5%;
+        }
+        50% {
+            left: 0;
+        }
+        75% {
+            left: +5%;
+        }
+        100% {
+            left: 0;
+        }
+    }
+    .cloud{
+        animation: cloud 4s ease infinite;
+        /*过度*/
+        transition: all 1s ease;
+    }
+    @keyframes cloud {
+        0% {
+            top: 0;
+        }
+        25% {
+            top: 5%;
+        }
+        50% {
+            top: 0;
+        }
+        75% {
+            top: +15%;
+        }
+        100% {
+            top: 0;
+        }
     }
 </style>
