@@ -30,3 +30,7 @@ const setHtmlFontSize = () => {
 };
 window.onresize = setHtmlFontSize;
 setHtmlFontSize();
+
+window.msg =false;
+
+

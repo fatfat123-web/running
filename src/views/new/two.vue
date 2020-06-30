@@ -19,6 +19,7 @@
 </template>
 
 <script>
+
     export default {
         name: "two",
         data(){
@@ -29,31 +30,39 @@
 
         },
         mounted() {
+
             // setTimeout(() => {
             //     this.$router.push('three')
             // }, 3000)
             // console.log(document.getElementById('music'))
         },
         methods:{
-            // autoPlayAudio() {
-            //     //把this的指向给存了起来，使得try里面的pause调用上面的pause方法
-            //     const _this = this
-            //     try {
-            //         WeixinJSBridge.invoke('WeixinJSBridgeReady', {}, function (e) {
-            //
-            //         });
-            //     } catch (e) {
-            //
-            //     }
-            // },
+            autoPlayAudio() {
+                console.log(111111111)
+                // const _this = this
+                try {
+                    WeixinJSBridge.invoke('WeixinJSBridgeReady', {}, function (e) {
+                        let aa=   document.getElementById('music')
+                        aa.play();
+                        msg= true
+                        console.log(msg)
+
+                    });
+                } catch (e) {
+                    let aa=   document.getElementById('music')
+                    aa.play();
+                    msg= true
+                    console.log(msg)
+                }
+            },
 
 
             swiperight() {
                 this.animate = false
                 setTimeout(() => {
-                let aa=   document.getElementById('music')
-                    aa.play();
-                    console.log(aa)
+                // let aa=   document.getElementById('music')
+                    this.autoPlayAudio()
+
 
                     // this.$refs.music.play();
                     this.animateEnd = false

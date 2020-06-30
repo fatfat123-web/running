@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div style="position: fixed;top:3.7%;right:23.1%;z-index: 999;">
-            <div class="rotation">{{music ? '关音乐' : '开音乐'}}</div>
+            <div class="rotation">{{msg ? '关音乐' : '开音乐'}}</div>
             <div class="loader1" @click="pause(true)">
                 <div class="loop">
                     <div class="ring"></div>
@@ -21,7 +21,7 @@
     export default {
         data() {
             return {
-                music: true,
+                music: false,
                 list: [
                     require('../../assets/images/bj.jpg'),
                     require('../../assets/images/bj1.png'),
@@ -41,7 +41,8 @@
             }
         },
         mounted() {
-            this.autoPlayAudio();
+
+            // this.autoPlayAudio();
             wxapi.wxRegister(this.wxRegCallback);
         },
         methods:{
@@ -91,14 +92,16 @@
                     // console.log(this.$refs.music.paused);
                     if (this.$refs.music.paused) {
                         this.$refs.music.play();// 这个就是播放
-                        this.music = true
+                        msg= true
+                        console.log(msg)
                         // console.log(this.music)
 
                     } else {
                         if (val) {
                             this.$refs.music.pause();// 这个就是暂停
-                            this.music = false
-                            console.log(this.music)
+                            msg = false
+                            console.log(msg)
+                            // console.log(this.music)
                         }
                     }
                 }
