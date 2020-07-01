@@ -33,8 +33,8 @@
                 <rain v-if="this.rs<18" style="position: absolute;right:15%;top: 0;height:20%;"></rain>
                 <!-- 下雪啦-->
                 <snow style="position: absolute;top: 20%;height:20%;width: auto"></snow>
-
-
+                <!--  气球-->
+                <img src="../../assets/images/balloon.gif" :style="balloon" style="height: auto;width:35%;position: absolute;"/>
                 <!-- 背景图-->
                 <img src="../../assets/images/bj.jpg" style="width: 100%;height: auto;"/>
                 <!--    前进    -->
@@ -48,7 +48,7 @@
                          v-show="index === mark">
                 </div>
                 <!--                云-->
-                <img src="../../assets/images/cloud.png" style="height: auto;width:35%;position: absolute;right: 5%;top: 0%;"/>
+                <img src="../../assets/images/cloud.png" style="height: auto;width:35%;position: absolute;right: 5%;top: 0;"/>
                 <img src="../../assets/images/cloud.png" class="cloud" style="height: auto;width:25%;position: absolute;right: 2%;top: 5%;"/>
                 <img src="../../assets/images/cloud.png"  style="height: auto;width:22%;position: absolute;right: 9%;top: 11%;"/>
                 <!--    <tree style="position: absolute;left:-35%;top: 20%;height:12%;width: auto" class="test"></tree>-->
@@ -76,7 +76,7 @@
                 img2: [require('../../assets/images/0.png'), require('../../assets/images/1.png'),
                     require('../../assets/images/2.png')],
                 go: {top: '35%', left: '8%'},
-
+                balloon:{top: '5%', left: '8%'},
                 kg: true,
                 //前进
                 front: null,
@@ -86,6 +86,8 @@
                 flagfind: false,
                 mark: 0,
                 rs: null,
+                flyleft:null,
+                flytop:null,
             }
 
         },
@@ -131,9 +133,12 @@
                     this.kg = false;
                     this.flagfind = false
                     this.retreat()
+
+
                 } else {
                     this.kg = true;
-                    this.flagfind = false
+                    this.flagfind = false;
+                    // this.$refs.go
                     this.advance()
                 }
             },
@@ -144,6 +149,13 @@
                 // console.log(this.rs)
                 let arr = [0, 1, 0, 2]
                 this.mark = arr[parseInt(this.rs) % 4];
+
+                //前进上天的效果
+                this.flyleft=this.$options.data().balloon.left;
+                this.flytop=this.$options.data().balloon.top;
+                this.balloon.left=parseFloat(this.flyleft)+(this.rs)+'%'
+
+
                 if (this.flagfind === true) return false;
                 window.requestAnimationFrame(this.advance)
             },
@@ -151,10 +163,16 @@
             retreat() {
                 let arr = [0, 1, 0, 2]
                 this.mark = arr[parseInt(this.rs) % 4];
+
+                //后退下降的效果 草这是为什么无缘无故就可以用了？？？
+                this.flyleft=this.$options.data().balloon.left;
+                this.flytop=this.$options.data().balloon.top;
+                this.balloon.left=(this.rs)-parseFloat(this.flyleft)+16+'%'
+
+
                 let div = this.$refs.scroll
                 div.scrollTop -= 4
-                if (this.flagfind === true)
-                    return false;
+                if (this.flagfind === true) return false;
                 window.requestAnimationFrame(this.retreat)
             },
             // 触摸结束
