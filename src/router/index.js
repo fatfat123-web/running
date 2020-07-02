@@ -5,12 +5,6 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'index',
-  //   component: () => import('@/views/index'),
-  //
-  // },
 
   {
     path: '/froth',
@@ -18,12 +12,7 @@ const routes = [
     component: () => import('@/views/froth'),
 
   },
-  {
-    path: '/login',
-    name: 'login',
-    component: () => import('@/views/login'),
 
-  },
   {
     path: '/rain',
     name: 'rain',
@@ -35,6 +24,11 @@ const routes = [
     name: 'tree',
     component: () => import('@/views/tree'),
 
+  },
+  {
+    path: '/slideshow',
+    name: 'slideshow',
+    component: () => import('@/views/slideshow'),
   },
   {
     path: '/snow',

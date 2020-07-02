@@ -37,16 +37,13 @@
                 <img src="../../assets/images/balloon.gif" :style="balloon" style="height: auto;width:35%;position: absolute;"/>
                 <!-- 背景图-->
                 <img src="../../assets/images/bj.jpg" style="width: 100%;height: auto;"/>
-                <!--    前进    -->
-                <div style="width:31%;position: fixed;" ref="go" :style="go" v-show="kg===false">
-                    <img style="width: 100%;height: auto" :src="item" v-for="(item,index) in img2"
-                         v-show="index === mark">
+
+                <!--    测试能不能直接旋转180度    -->
+                <div style="width:31%;position: fixed;" :style="go">
+                    <img style="width: 100%;height: auto" :src="item" v-for="(item,index) in img"
+                         v-show="index === mark"      :class="run">
                 </div>
-                <!--    后退   -->
-                <div style="width:31%;position: fixed;" ref="go" :style="go" v-show="kg===true">
-                    <img style="width: 100%;height: auto" class="element" :src="item" v-for="(item,index) in img"
-                         v-show="index === mark">
-                </div>
+
                 <!--                云-->
                 <img src="../../assets/images/cloud.png" style="height: auto;width:35%;position: absolute;right: 5%;top: 0;"/>
                 <img src="../../assets/images/cloud.png" class="cloud" style="height: auto;width:25%;position: absolute;right: 2%;top: 5%;"/>
@@ -73,10 +70,9 @@
                 img: [require('../../assets/images/a.png'), require('../../assets/images/b.png'),
                     require('../../assets/images/c.png')],
 
-                img2: [require('../../assets/images/0.png'), require('../../assets/images/1.png'),
-                    require('../../assets/images/2.png')],
-                go: {top: '35%', left: '8%'},
+                go: {top: '35%', left: '8%',},
                 balloon:{top: '5%', left: '8%'},
+                run: {'runAnrun': false,},
                 kg: true,
                 //前进
                 front: null,
@@ -144,16 +140,16 @@
                 this.startY = e.changedTouches[0].pageY;
                 this.front = (clientHeight) * (0.4);
                 if (this.startY < this.front) {
-                    this.kg = false;
+                    this.run['runAnrun'] = true;
                     this.flagfind = false
                     this.retreat()
 
 
                 } else {
-                    this.kg = true;
+                    this.run['runAnrun'] = false;
                     this.flagfind = false;
-                    // this.$refs.go
                     this.advance()
+
                 }
             },
             //   前进
@@ -360,6 +356,16 @@
         transition: all 1s ease;
 
     }
+
+    .runAnrun {
+        transform: rotateX(180deg);
+        -ms-transform: rotateX(180deg);
+        -moz-transform: rotateX(180deg);
+        -webkit-transform: rotateX(180deg);
+        -o-transform: rotateX(180deg);
+        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+    }
+
 
     @keyframes left {
         0% {

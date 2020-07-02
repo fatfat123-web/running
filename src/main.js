@@ -4,7 +4,9 @@ import router from './router'
 import store from './store'
 import animated from 'animate.css'
 import click from './assets/js/click'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
 
+Vue.use(VueAwesomeSwiper)
 Vue.use(animated)
 var VueTouch = require('vue-touch')
 Vue.use(VueTouch, {name: 'v-touch'})
