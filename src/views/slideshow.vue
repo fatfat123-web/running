@@ -1,7 +1,8 @@
 <template>
     <div class="swiper-container">
-        <div class="swiper-wrapper" >
-            <div  v-for="item in 4" :key="item"  class="swiper-slide">{{item}}</div>
+        <div class="swiper-wrapper">
+            <div v-for="item in 4" :key="item" :style="{background: slide[item-1]}" class="swiper-slide slide">{{item}}
+            </div>
         </div>
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
@@ -13,16 +14,24 @@
 <script>
     import '../assets/css/swiper.min.css';
     import Swiper from 'swiper';
+
     export default {
         name: "slideshow",
         data() {
-            return {}
+            return {
+                slide: [
+                    `url(${require('../assets/images/bj1.png')})no-repeat`,
+                    `url(${require('../assets/images/bj2.png')})no-repeat`,
+                    `url(${require('../assets/images/bj3.png')})no-repeat`,
+                    `url(${require('../assets/images/bj4.png')})no-repeat`,
+                       ]
+            }
         },
         mounted() {
             var swiper = new Swiper('.swiper-container', {
                 spaceBetween: 30,
                 centeredSlides: true,
-                direction:'vertical',
+                direction: 'vertical',
                 autoplay: {
                     delay: 2500,
                     disableOnInteraction: false,
@@ -52,10 +61,12 @@
         margin: 0;
         padding: 0;
     }
-    .swiper.min.css{
+
+    .swiper.min.css {
 
 
     }
+
     .swiper-container {
         width: 100%;
         height: 100%;
@@ -80,5 +91,9 @@
         -ms-flex-align: center;
         -webkit-align-items: center;
         align-items: center;
+    }
+
+    .slide {
+        background: #ff9a9f;
     }
 </style>

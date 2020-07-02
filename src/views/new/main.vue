@@ -31,6 +31,9 @@
                     require('../../assets/images/04.png'),
                     require('../../assets/images/05.png'),
                     require('../../assets/images/cloud.png'),
+                    require('../../assets/images/hint.gif'),
+                    require('../../assets/images/hand.gif'),
+                    require('../../assets/images/balloon.gif'),
 
                 ],
                 isPlay: false,

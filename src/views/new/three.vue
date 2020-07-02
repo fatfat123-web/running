@@ -135,7 +135,7 @@
             },
             gtouchstart(e) {
                 if (this.tips) {
-                    this.$refs.scroll.scrollTop += 1
+                    this.$refs.scroll.scrollTop += 2
                     this.tips = false;
                     return;
                 }
@@ -220,8 +220,8 @@
         margin: 0 auto;
         overflow-y: auto;
         overflow-x: hidden;
-        background: url(../../assets/images/bj.jpg) no-repeat bottom;
-        background-size: 100%;
+        /*background: url(../../assets/images/bj.jpg) no-repeat bottom;*/
+        /*background-size: 100% ;*/
     }
 
     .main {
