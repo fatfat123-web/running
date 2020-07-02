@@ -135,7 +135,7 @@
             },
             gtouchstart(e) {
                 if (this.tips) {
-                    this.$refs.scroll.scrollTop += 2
+                    this.$refs.scroll.scrollTop += 1
                     this.tips = false;
                     return;
                 }
