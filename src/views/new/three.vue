@@ -117,6 +117,20 @@
                 //滚动条滚动距离 百分比
                 let scrolldrag = scrollTop / Height
                 this.rs = (scrolldrag * 100).toFixed(2) * 1
+
+                let data = this.$options.data()
+            //    气球跟着一起飞
+                if (this.rs >= 0) {
+                    let rs = this.rs - 0
+                    if (rs <= 100) {
+
+                        let balloon=data.balloon
+                        this.balloon.top = parseFloat(balloon.top) +(this.rs)/1.2+'%'
+                        this.balloon.left = parseFloat(balloon.left) +(this.rs)/1.1+'%'
+
+                    }
+
+                }
             },
             gtouchstart(e) {
                 if (this.tips) {
@@ -151,9 +165,9 @@
                 this.mark = arr[parseInt(this.rs) % 4];
 
                 //前进上天的效果
-                this.flyleft=this.$options.data().balloon.left;
-                this.flytop=this.$options.data().balloon.top;
-                this.balloon.left=parseFloat(this.flyleft)+(this.rs)+'%'
+                // this.flyleft=this.$options.data().balloon.left;
+                // this.flytop=this.$options.data().balloon.top;
+                // this.balloon.left=parseFloat(this.flyleft)+(this.rs)+'%'
 
 
                 if (this.flagfind === true) return false;
@@ -165,9 +179,9 @@
                 this.mark = arr[parseInt(this.rs) % 4];
 
                 //后退下降的效果 草这是为什么无缘无故就可以用了？？？
-                this.flyleft=this.$options.data().balloon.left;
-                this.flytop=this.$options.data().balloon.top;
-                this.balloon.left=(this.rs)-parseFloat(this.flyleft)+16+'%'
+                // this.flyleft=this.$options.data().balloon.left;
+                // this.flytop=this.$options.data().balloon.top;
+                // this.balloon.left=(this.rs)-parseFloat(this.flyleft)+16+'%'
 
 
                 let div = this.$refs.scroll
