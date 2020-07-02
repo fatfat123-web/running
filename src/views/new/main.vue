@@ -25,6 +25,13 @@
                     require('../../assets/images/bj.jpg'),
                     require('../../assets/images/bj1.png'),
                     require('../../assets/images/bj2.png'),
+                    require('../../assets/images/01.png'),
+                    require('../../assets/images/02.png'),
+                    require('../../assets/images/03.png'),
+                    require('../../assets/images/04.png'),
+                    require('../../assets/images/05.png'),
+                    require('../../assets/images/cloud.png'),
+
                 ],
                 isPlay: false,
             }

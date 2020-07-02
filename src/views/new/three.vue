@@ -25,8 +25,8 @@
             </div>
 
             <div class="main">
-
-                <pig style="position: absolute;top: 20%;height:20%;width: auto" class="test"></pig>
+                <!--   这是一头猪      -->
+                <pig style="position: absolute;top: 20%;height:20%;width: auto;" class="test"></pig>
 
                 <!-- 下雨-->
 
@@ -34,20 +34,24 @@
                 <!-- 下雪啦-->
                 <snow style="position: absolute;top: 20%;height:20%;width: auto"></snow>
                 <!--  气球-->
-                <img src="../../assets/images/balloon.gif" :style="balloon" style="height: auto;width:35%;position: absolute;"/>
+                <img src="../../assets/images/balloon.gif" :style="balloon"
+                     style="height: auto;width:35%;position: absolute;"/>
                 <!-- 背景图-->
                 <img src="../../assets/images/bj.jpg" style="width: 100%;height: auto;"/>
 
                 <!--    测试能不能直接旋转180度    -->
                 <div style="width:31%;position: fixed;" :style="go">
                     <img style="width: 100%;height: auto" :src="item" v-for="(item,index) in img"
-                         v-show="index === mark"      :class="run">
+                         v-show="index === mark" :class="run">
                 </div>
 
                 <!--                云-->
-                <img src="../../assets/images/cloud.png" style="height: auto;width:35%;position: absolute;right: 5%;top: 0;"/>
-                <img src="../../assets/images/cloud.png" class="cloud" style="height: auto;width:25%;position: absolute;right: 2%;top: 5%;"/>
-                <img src="../../assets/images/cloud.png"  style="height: auto;width:22%;position: absolute;right: 9%;top: 11%;"/>
+                <img src="../../assets/images/cloud.png"
+                     style="height: auto;width:35%;position: absolute;right: 5%;top: 0;"/>
+                <img src="../../assets/images/cloud.png" class="cloud"
+                     style="height: auto;width:25%;position: absolute;right: 2%;top: 5%;"/>
+                <img src="../../assets/images/cloud.png"
+                     style="height: auto;width:22%;position: absolute;right: 9%;top: 11%;"/>
                 <!--    <tree style="position: absolute;left:-35%;top: 20%;height:12%;width: auto" class="test"></tree>-->
 
 
@@ -67,11 +71,12 @@
         data() {
             return {
                 tips: true,
-                img: [require('../../assets/images/a.png'), require('../../assets/images/b.png'),
-                    require('../../assets/images/c.png')],
+                img: [require('../../assets/images/05.png'),  require('../../assets/images/02.png'),
+                      require('../../assets/images/03.png'),  require('../../assets/images/04.png'),
+                      require('../../assets/images/01.png')],
 
                 go: {top: '35%', left: '8%',},
-                balloon:{top: '5%', left: '8%'},
+                balloon: {top: '5%', left: '8%'},
                 run: {'runAnrun': false,},
                 kg: true,
                 //前进
@@ -82,8 +87,8 @@
                 flagfind: false,
                 mark: 0,
                 rs: null,
-                flyleft:null,
-                flytop:null,
+                flyleft: null,
+                flytop: null,
             }
 
         },
@@ -115,14 +120,14 @@
                 this.rs = (scrolldrag * 100).toFixed(2) * 1
 
                 let data = this.$options.data()
-            //    气球跟着一起飞
+                //    气球跟着一起飞
                 if (this.rs >= 0) {
                     let rs = this.rs - 0
                     if (rs <= 100) {
 
-                        let balloon=data.balloon
-                        this.balloon.top = parseFloat(balloon.top) +(this.rs)/1.2+'%'
-                        this.balloon.left = parseFloat(balloon.left) +(this.rs)/1.1+'%'
+                        let balloon = data.balloon
+                        this.balloon.top = parseFloat(balloon.top) + (this.rs) / 1.2 + '%'
+                        this.balloon.left = parseFloat(balloon.left) + (this.rs) / 1.1 + '%'
 
                     }
 
@@ -157,7 +162,7 @@
                 let div = this.$refs.scroll
                 div.scrollTop += 4
                 // console.log(this.rs)
-                let arr = [0, 1, 0, 2]
+                let arr = [1, 2, 3, 4]
                 this.mark = arr[parseInt(this.rs) % 4];
 
                 //前进上天的效果
@@ -171,7 +176,7 @@
             },
             // 后退
             retreat() {
-                let arr = [0, 1, 0, 2]
+                let arr = [1, 2, 3, 4]
                 this.mark = arr[parseInt(this.rs) % 4];
 
                 //后退下降的效果 草这是为什么无缘无故就可以用了？？？
@@ -369,26 +374,28 @@
 
     @keyframes left {
         0% {
-            left: 0;
+            left: -50%;
         }
         25% {
-            left: -5%;
+            left: -45%;
         }
         50% {
-            left: 0;
+            left: -50%;
         }
         75% {
-            left: +5%;
+            left: -55%;
         }
         100% {
-            left: 0;
+            left: -50%;
         }
     }
-    .cloud{
+
+    .cloud {
         animation: cloud 4s ease infinite;
         /*过度*/
         transition: all 1s ease;
     }
+
     @keyframes cloud {
         0% {
             top: 0;
