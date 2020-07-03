@@ -28,7 +28,7 @@
                 <!--   这是一头猪      -->
                 <pig style="position: absolute;top: 20%;height:20%;width: auto;" class="test"></pig>
 <!--                <div  class="ninety" style="position: absolute;top: 20%;left: 10%" ref="ninety" >{{this.test.substring(0, rs)}}</div>-->
-                <div  class="ninety" style="position: absolute;top: 20%;left: 10%" ref="ninety" v-html="this.test"></div>
+                <div  class="ninety" style="position: absolute;top: 20%;left: 10%" ref="ninety"></div>
                 <!-- 下雨-->
 
                 <rain v-if="this.rs<18" style="position: absolute;right:15%;top: 0;height:20%;"></rain>
@@ -77,7 +77,7 @@
                       require('../../assets/images/01.png')],
 
                 go: {top: '35%', left: '8%',},
-                test:"'我只是想看看能不能逐'+'</br>'+'字输出这些内容?????????????'",
+                test:"",
                 balloon: {top: '5%', left: '8%'},
                 run: {'runAnrun': false,},
                 kg: true,
@@ -107,7 +107,16 @@
             // window.addEventListener('scroll', this.scroll);
         },
         mounted() {
-           console.log(this.test.length)
+            const test = '我只是想看看能不能逐' + '</br>'+'字输出这些内容?????????????'
+            let i = 0;
+            let timer = setInterval(() => {
+               i++
+               this.$refs.ninety.innerHTML = test.substring(0, i)
+               console.log(this.$refs.ninety.innerHTML)
+               if (this.$refs.ninety.innerHTML === test) {
+                   clearInterval(timer);
+               }
+            }, 1000)
         },
         methods: {
             scroll(e) {
