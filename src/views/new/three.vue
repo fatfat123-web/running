@@ -141,9 +141,9 @@
                 <snow style="position: absolute;top: 70%;height:20%;width: auto"></snow>
 
                 <!--    测试能不能直接旋转180度    -->
-                <div style="width:31%;position: fixed;" :style="go" :class="run">
+                <div style="width:31%;position: fixed;" :style="go">
                     <img style="width: 100%;height: auto" :src="item" v-for="(item,index) in img"
-                         v-show="index === mark" >
+                         v-show="index === mark" :class="run">
                 </div>
 
 
