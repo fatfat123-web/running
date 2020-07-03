@@ -27,7 +27,7 @@
             <div class="main">
                 <!--   这是一头猪      -->
                 <pig style="position: absolute;top: 20%;height:20%;width: auto;" class="test"></pig>
-
+                <div  class="ninety" style="position: absolute;top: 20%;left: 10%" ref="ninety" >{{this.test.substring(0, rs)}}</div>
                 <!-- 下雨-->
 
                 <rain v-if="this.rs<18" style="position: absolute;right:15%;top: 0;height:20%;"></rain>
@@ -52,7 +52,7 @@
                      style="height: auto;width:25%;position: absolute;right: 2%;top: 5%;"/>
                 <img src="../../assets/images/cloud.png"
                      style="height: auto;width:22%;position: absolute;right: 9%;top: 11%;"/>
-                <!--    <tree style="position: absolute;left:-35%;top: 20%;height:12%;width: auto" class="test"></tree>-->
+
 
 
             </div>
@@ -76,6 +76,7 @@
                       require('../../assets/images/01.png')],
 
                 go: {top: '35%', left: '8%',},
+                test:"'我只是想看看能不能逐'+'</br>'+'字输出这些内容'",
                 balloon: {top: '5%', left: '8%'},
                 run: {'runAnrun': false,},
                 kg: true,
@@ -92,6 +93,9 @@
             }
 
         },
+        watch:{
+
+        },
         components: {
             rain,
             tree,
@@ -102,7 +106,7 @@
             // window.addEventListener('scroll', this.scroll);
         },
         mounted() {
-
+           console.log(this.test.length)
         },
         methods: {
             scroll(e) {
@@ -128,6 +132,13 @@
                         let balloon = data.balloon
                         this.balloon.top = parseFloat(balloon.top) + (this.rs) / 1.2 + '%'
                         this.balloon.left = parseFloat(balloon.left) + (this.rs) / 1.1 + '%'
+
+                    }
+                    if (this.rs>10){
+                     let rs=parseInt(this.rs*5)-50
+                     console.log(rs)
+
+                       console.log(this.test.substring(0, rs))
 
                     }
 
@@ -412,5 +423,15 @@
         100% {
             top: 0;
         }
+    }
+    .ninety{
+        transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
+        font-size: 0.4rem;
+
     }
 </style>
