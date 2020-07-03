@@ -180,9 +180,9 @@
         data() {
             return {
                 tips: true,
-                img: [require('../../assets/images/05.png'), require('../../assets/images/02.png'),
-                    require('../../assets/images/03.png'), require('../../assets/images/04.png'),
-                    require('../../assets/images/01.png')],
+                img: [require('../../assets/images/e.png'), require('../../assets/images/b.png'),
+                    require('../../assets/images/c.png'), require('../../assets/images/d.png'),
+                    require('../../assets/images/a.png')],
 
                 go: {top: '35%', left: '8%',},
                 test: "",
