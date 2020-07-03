@@ -31,7 +31,7 @@
 <!--                <pig      v-show="this.rs>95"-->
 <!--                        style="position: absolute;top: 90%;height:5%;width: auto;" class="test"></pig>-->
 
-                <div class="ninety" style="position: absolute;top: 20%;left: 50%;font-size: 0.4rem" ref="ninety"></div>
+<!--                <div class="ninety" style="position: absolute;top: 20%;left: 50%;font-size: 0.4rem" ref="ninety"></div>-->
 
 
                 <img src="../../assets/images/house1.png" :style="house1"
@@ -141,9 +141,9 @@
                 <snow style="position: absolute;top: 70%;height:20%;width: auto"></snow>
 
                 <!--    测试能不能直接旋转180度    -->
-                <div style="width:31%;position: fixed;" :style="go">
+                <div style="width:31%;position: fixed;" :style="go" :class="run">
                     <img style="width: 100%;height: auto" :src="item" v-for="(item,index) in img"
-                         v-show="index === mark" :class="run">
+                         v-show="index === mark" >
                 </div>
 
 
