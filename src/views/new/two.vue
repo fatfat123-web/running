@@ -82,8 +82,8 @@
         height: 100vh;
         margin: 0 auto;
         position: relative;
-        background: url(../../assets/images/bj.jpg) no-repeat bottom;
-        background-size: 100%;
+        background: url(../../assets/images/qj.png) no-repeat;
+        background-size: 50% ;
     }
     /*.container {*/
     /*    background: url("../../assets/images/bj2.png") no-repeat;*/

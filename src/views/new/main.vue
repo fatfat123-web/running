@@ -23,17 +23,45 @@
                 music: false,
                 list: [
                     require('../../assets/images/bj.jpg'),
+                    require('../../assets/images/qj.png'),
                     require('../../assets/images/bj1.png'),
                     require('../../assets/images/bj2.png'),
+                    require('../../assets/images/bj3.png'),
+                    require('../../assets/images/bj4.png'),
                     require('../../assets/images/01.png'),
                     require('../../assets/images/02.png'),
                     require('../../assets/images/03.png'),
                     require('../../assets/images/04.png'),
                     require('../../assets/images/05.png'),
+
+                    require('../../assets/images/dialogue1.png'),
+                    require('../../assets/images/dialogue2.png'),
+                    require('../../assets/images/dialogue3.png'),
+                    require('../../assets/images/dialogue4.png'),
+                    require('../../assets/images/dialogue5.png'),
+                    require('../../assets/images/dialogue6.png'),
+                    require('../../assets/images/dialogue7.png'),
+                    require('../../assets/images/dialogue8.png'),
+                    require('../../assets/images/dialogue9.png'),
+                    require('../../assets/images/dialogue10.png'),
+                    require('../../assets/images/dialogue11.png'),
+
+                    require('../../assets/images/house1.png'),
+                    require('../../assets/images/house2.png'),
+                    require('../../assets/images/house3.png'),
+
+                    require('../../assets/images/picture1.png'),
+                    require('../../assets/images/picture2.png'),
+                    require('../../assets/images/picture3.png'),
+                    require('../../assets/images/picture4.png'),
+                    require('../../assets/images/picture5.png'),
+
+                    require('../../assets/images/balloon.gif'),
                     require('../../assets/images/cloud.png'),
                     require('../../assets/images/hint.gif'),
                     require('../../assets/images/hand.gif'),
-                    require('../../assets/images/balloon.gif'),
+                    require('../../assets/images/cartridge.png'),
+                    require('../../assets/images/hospital.png'),
 
                 ],
                 isPlay: false,
@@ -57,7 +85,7 @@
         // },
         watch: {
             isPlay(val) {
-                console.log(val)
+                // console.log(val)
             }
         },
         mounted() {
