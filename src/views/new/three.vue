@@ -10,7 +10,7 @@
                 <div class="pen" style="  top:11%;left: 27.3%;"></div>
                 <div class="pen" style="  bottom:11%;left: 27.3%;"></div>
                 <img src="../../assets/images/hint.gif"
-                     style=" position: absolute;left: 32%;top: 27%;width: 2.5rem;height: auto">
+                     style=" position: absolute;left: 35%;top: 27%;width: 2.5rem;height: auto">
                 <div class="moveup">
                     <div class="arrow arrow-up">
                     </div>
