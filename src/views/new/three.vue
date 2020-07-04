@@ -203,7 +203,7 @@
                 dialogue5:{top: '47.5%', left: '26%'},
                 dialogue6:{top: '58%', left: '82%'},
                 dialogue7:{top: '67.5%', left: '68%'},
-                dialogue8:{top: '74%', left: '61%'},
+                dialogue8:{top: '74.05%', left: '61%'},
                 dialogue9:{top: '82.5%', left: '38%'},
                 dialogue10:{top: '84%', left: '38%'},
                 dialogue11:{top: '91%', left: '43%'},
@@ -374,6 +374,9 @@
 <style scoped lang="scss">
     img {
         pointer-events: none; /* 禁止长按图片保存 */
+        display: block;
+
+
     }
 
     .hint {
