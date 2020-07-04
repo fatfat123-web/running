@@ -140,6 +140,11 @@
                 <!-- 下雪啦-->
                 <snow style="position: absolute;top: 70%;height:20%;width: auto"></snow>
 
+                <!--  气球-->
+                <img v-if="this.rs<85"
+                     src="../../assets/images/balloon.gif" :style="balloon"
+                     style="height: auto;width:35%;position: absolute;"/>
+
                 <!--    测试能不能直接旋转180度    -->
                 <div style="width:31%;position: fixed;" :style="go">
                     <img style="width: 100%;height: auto" :src="item" v-for="(item,index) in img"
@@ -147,10 +152,7 @@
                 </div>
 
 
-                <!--  气球-->
-                <img v-if="this.rs<85"
-                        src="../../assets/images/balloon.gif" :style="balloon"
-                     style="height: auto;width:35%;position: absolute;"/>
+
 
                 <!--                云-->
                 <!--                <img src="../../assets/images/cloud.png"-->
@@ -189,7 +191,7 @@
                     require('../../assets/images/a.png')
                     ],
 
-                go: {top: '35%', left: '8%',},
+                go: {top: '35%', left: '12%',},
                 test: "",
                 balloon: {top: '5%', left: '8%'},
                 house1:{top: '11.5%', left: '-18%'},
@@ -201,10 +203,10 @@
                 dialogue5:{top: '47.5%', left: '26%'},
                 dialogue6:{top: '58%', left: '82%'},
                 dialogue7:{top: '67.5%', left: '68%'},
-                dialogue8:{top: '73%', left: '61%'},
+                dialogue8:{top: '74%', left: '61%'},
                 dialogue9:{top: '82.5%', left: '38%'},
                 dialogue10:{top: '84%', left: '38%'},
-                dialogue11:{top: '91%', left: '38%'},
+                dialogue11:{top: '91%', left: '43%'},
                 cartridge:{top: '28.5%', left: '0'},
                 picture1:{top: '31.8%', left: '8%'},
                 picture2:{top: '36%', left: '4%'},
@@ -328,7 +330,7 @@
             //   前进
             advance() {
                 let div = this.$refs.scroll
-                div.scrollTop += 4
+                div.scrollTop += 3
                 // console.log(this.rs)
                 let arr = [1, 2, 3, 4]
                 this.mark = arr[parseInt(this.rs) % 4];
@@ -354,7 +356,7 @@
 
 
                 let div = this.$refs.scroll
-                div.scrollTop -= 4
+                div.scrollTop -= 3
                 if (this.flagfind === true) return false;
                 window.requestAnimationFrame(this.retreat)
             },
