@@ -28,6 +28,7 @@
                     require('../../assets/images/bj2.png'),
                     require('../../assets/images/bj3.png'),
                     require('../../assets/images/bj4.png'),
+
                     require('../../assets/images/a.png'),
                     require('../../assets/images/b.png'),
                     require('../../assets/images/c.png'),
