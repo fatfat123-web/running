@@ -74,7 +74,7 @@
                 let img = new Image()
                 img.src = item;
                 count++
-                if (count === 3) {
+                if (count === 36) {
                     this.$router.push('/one')
                 }
             }
