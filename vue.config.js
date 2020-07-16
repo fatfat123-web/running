@@ -11,7 +11,7 @@ module.exports = {
         open: true,  // npm run serve后自动打开页面
         // host: '0.0.0.0',  // 匹配本机IP地址(默认是0.0.0.0)
         port: 8080, // 开发服务器运行端口号
-        public: require('os').networkInterfaces()[Object.keys(require('os').networkInterfaces())[0]][1].address + ':8080',
+        // public: require('os').networkInterfaces()[Object.keys(require('os').networkInterfaces())[0]][1].address + ':8080',
         disableHostCheck: true
     },
     // 注：目前本项目暂时没有写后台接口，没有跨域问题，暂时不配置proxy

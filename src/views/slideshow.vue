@@ -75,6 +75,7 @@
     }
 
       .swiper-slide {
+          background-size: 100%!important;
         text-align: center;
         font-size: 18px;
         background: #fff;
