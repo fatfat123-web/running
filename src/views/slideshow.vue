@@ -1,7 +1,8 @@
 <template>
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-            <div v-for="item in 4" :key="item" :style="{background: slide[item-1]}" class="swiper-slide slide">{{item}}
+    <div class="swiper-container" style="overflow: hidden;">
+        <div class="swiper-wrapper" >
+            <div v-for="item in 4" :key="item" style=" background-size: contain" :style="{background: slide[item-1]}"
+                 class="swiper-slide slide" >{{item}}
             </div>
         </div>
         <!-- Add Pagination -->
@@ -29,7 +30,7 @@
         },
         mounted() {
             var swiper = new Swiper('.swiper-container', {
-                spaceBetween: 30,
+                // spaceBetween: 30,
                 centeredSlides: true,
                 direction: 'vertical',
                 autoplay: {
@@ -73,11 +74,11 @@
 
     }
 
-    .swiper-slide {
+      .swiper-slide {
         text-align: center;
         font-size: 18px;
         background: #fff;
-
+        margin-bottom: 0;
         /* Center slide text vertically */
         display: -webkit-box;
         display: -ms-flexbox;
@@ -91,9 +92,11 @@
         -ms-flex-align: center;
         -webkit-align-items: center;
         align-items: center;
+
     }
 
     .slide {
-        background: #ff9a9f;
+
+        color: #ff9a9f;
     }
 </style>

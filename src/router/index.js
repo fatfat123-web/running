@@ -26,7 +26,7 @@ const routes = [
 
   },
   {
-    path: '/slideshow',
+    path: '/',
     name: 'slideshow',
     component: () => import('@/views/slideshow'),
   },
@@ -41,7 +41,7 @@ const routes = [
     component: () => import('@/views/pig'),
   },
   {
-    path: '/',
+    path: '/main',
     component: () => import('@/views/new/main'),
     children: [
       {
