@@ -57,7 +57,7 @@
                     var backSnowNum = 80;
                     var snows = [];
                     var backSnows = [];
-
+                    //这个X能算是范围吗
                     if (X < 768) {
                         snowNum = 25;
                         backSnowNum = 25;
