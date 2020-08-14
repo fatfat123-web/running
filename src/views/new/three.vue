@@ -591,6 +591,7 @@
         -webkit-writing-mode: vertical-lr;
         -ms-writing-mode: tb-lr;
         writing-mode: vertical-lr;
+        text-orientation: sideways;
 
     }
     .MySignature{
